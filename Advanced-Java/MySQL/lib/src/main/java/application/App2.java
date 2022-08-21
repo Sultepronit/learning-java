@@ -7,13 +7,16 @@ public class App2 {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
-		System.out.println("Hello!");
-		Class.forName("org.sqlite.JDBC");
+		//System.out.println("Hello!");
+		//Class.forName("org.sqlite.JDBC");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
-		String dbUrl = "jdbc:sqlite:people.db";
-		var conn = DriverManager.getConnection(dbUrl);
+		//String dbUrl = "jdbc:sqlite:people.db";
+		String dbUrl = "jdbc:mysql://localhost:3306/people";
 		
-		// if no error -- everithing works
+		var conn = DriverManager.getConnection(dbUrl, "root", "password");
+		
+		// if no error --g everithing works
 		//System.out.println(conn);
 		
 		var stmt = conn.createStatement();
@@ -22,24 +25,17 @@ public class App2 {
 		// by default conn.setAutoCommit(true);
 		conn.setAutoCommit(false);
 		
-		//var sql = "create table user (id integer primary key, name text not null)";
-		var sql = "create table if not exists user (id integer primary key, name text not null)";
-		stmt.execute(sql);
-		
-		//not effective
-		/*sql = "insert into user (id, name) values (0, 'Bob')";
-		stmt.execute(sql);
-		sql = "insert into user (id, name) values (1, 'Mary')";
-		stmt.execute(sql);*/
 		int[] ids = {1, 2, 3};
 		String[] names = {"Ann", "Bob", "Sue"};
 		
-		sql = "insert into user (id, name) values(?, ?)";
+		var sql = "insert into user (id, name) values(?, ?)";
 		var insertStmt = conn.prepareStatement(sql);
 		
 		for(int i = 0; i < ids.length; i++) {
 			insertStmt.setInt(1, ids[i]);
 			insertStmt.setString(2, names[i]);
+			
+			//works only once!
 			insertStmt.executeUpdate();
 		}
 		
@@ -57,12 +53,6 @@ public class App2 {
 			
 			System.out.println(id + ": " + name);
 		}
-		
-		// now, we deleted our table
-		sql = "drop table user";
-		stmt.execute(sql);
-		//needed if conn.setAutoCommit(false);
-		conn.commit();
 		
 		stmt.close();
 		conn.close();
