@@ -17,6 +17,11 @@ public class App {
 		
 		System.out.println("Connected");
 		
+		UserDao userDao = new UserDaoImpl();
+		userDao.save(new User("Mars"));
+		userDao.save(new User("Mercury"));
+		System.out.println("Done!");
+		
 		try {
 			db.close();
 		} catch (SQLException e) {

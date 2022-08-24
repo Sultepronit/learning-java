@@ -5,12 +5,12 @@ public class User {
 	private String name;
 	
 	User(String name) {
-		name = this.name; 
+		this.name = name; 
 	}
 	
 	User(int id, String name) {
-		id = this.id;
-		name = this.name; 
+		this.id = id;
+		this.name = name; 
 	}
 
 	public int getId() {
@@ -28,6 +28,12 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 	
 }
