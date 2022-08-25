@@ -18,9 +18,12 @@ public class App {
 		System.out.println("Connected");
 		
 		UserDao userDao = new UserDaoImpl();
-		userDao.save(new User("Mars"));
+		/*userDao.save(new User("Mars"));
 		userDao.save(new User("Mercury"));
-		System.out.println("Done!");
+		System.out.println("Done!");*/
+		
+		var users = userDao.getAll();
+		users.forEach(System.out::println);
 		
 		try {
 			db.close();

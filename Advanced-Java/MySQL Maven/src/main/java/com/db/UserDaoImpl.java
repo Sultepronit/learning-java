@@ -1,6 +1,7 @@
 package com.db;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +46,28 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<User> users = new ArrayList<>();
+		
+		var conn = Database.instance().getConnection();
+		
+		try {
+			var stmt = conn.createStatement();
+			
+			var rs = stmt.executeQuery("select id, name from user");
+			
+			while(rs.next()) {
+				var id = rs.getInt("id");
+				var name = rs.getString("name");
+				
+				users.add(new User(id, name));
+			}
+			
+			stmt.close();
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+		return users;
 	}
 
 }
