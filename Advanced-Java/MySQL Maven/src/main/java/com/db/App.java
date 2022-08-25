@@ -25,6 +25,16 @@ public class App {
 		var users = userDao.getAll();
 		users.forEach(System.out::println);
 		
+		var id = 0;
+		var userOpt = userDao.findById(id);
+		System.out.println(userOpt);
+		// only when not empty!!!
+		//System.out.println(userOpt.get());
+		if(userOpt.isPresent()) System.out.println(userOpt.get());
+		else System.out.println("No user with id: " + id);
+		
+		userDao.delete(new User(7, null));
+		
 		try {
 			db.close();
 		} catch (SQLException e) {
