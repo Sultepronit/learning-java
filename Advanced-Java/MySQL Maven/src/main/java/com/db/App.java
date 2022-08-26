@@ -1,23 +1,36 @@
 package com.db;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class App {
 	public static void main(String[] args) {
+		
+		Properties props = new Properties();
+		try {
+			props.load(App.class.getResourceAsStream("/config/db.properties"));
+		} catch (Exception e) {
+			System.out.println("Cannot load properties file!");
+			return;
+		}
 		
 		var db = Database.instance();
 		// cannot use private constructor 
 		//Database db2 = new Database();
 		
 		try {
-			db.connect();
+			db.connect(props);
 		} catch (SQLException e) {
 			System.out.println("Cannot connect to database!");
+			return;
 		}
 		
 		System.out.println("Connected");
 		
 		UserDao userDao = new UserDaoImpl();
+		
+		///// create
 		/*userDao.save(new User("Mars"));
 		userDao.save(new User("Mercury"));
 		System.out.println("Done!");*/
@@ -25,14 +38,22 @@ public class App {
 		var users = userDao.getAll();
 		users.forEach(System.out::println);
 		
-		var id = 0;
+		var id = 3;
 		var userOpt = userDao.findById(id);
-		System.out.println(userOpt);
+		//System.out.println(userOpt);
 		// only when not empty!!!
 		//System.out.println(userOpt.get());
-		if(userOpt.isPresent()) System.out.println(userOpt.get());
+		if(userOpt.isPresent()) {
+			///// retrieve
+			User user = userOpt.get();
+			System.out.println(user);
+			///// update
+			user.setName("Snoopy");
+			userDao.update(user);
+		}
 		else System.out.println("No user with id: " + id);
 		
+		///// delete
 		userDao.delete(new User(7, null));
 		
 		try {
