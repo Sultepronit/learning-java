@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,17 +24,24 @@ public class UserDaoImplTest {
 	private static int NUM_TEST_USERS =1000;
 	
 	private List<User> loadUsers() throws IOException {
-		var temp = Files.lines(Paths.get("../greatexpectations.txt"));
-		
-		temp.forEach(System.out::println);
-		
-		return null;
+		return Files
+				.lines(Paths.get("../greatexpectations.txt"))//lines
+				.map(line -> line.split("[^A-Za-z]"))//arrays of words
+				.map(Arrays::asList)//Lists of words
+				.flatMap(list -> list.stream())//words and empty entries
+				.filter(word -> word.length() > 3 && word.length() < 20)
+				.map(word -> new User(word))
+				.limit(NUM_TEST_USERS)
+				.collect(Collectors.toList());
 	}
 	
 	@Before
 	public void setUp() throws SQLException, IOException {
 		
 		users = loadUsers();
+		
+		System.out.println(users);
+		System.out.println(users.size());
 		
 		var props = Profile.getProperties("db"); 
 		
