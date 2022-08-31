@@ -22,7 +22,7 @@ public class UserDaoImplTest {
 	private Connection conn;
 	private List<User> users;
 	
-	private static int NUM_TEST_USERS = 2;
+	private static int NUM_TEST_USERS = 1000;
 	
 	private List<User> loadUsers() throws IOException {
 		return Files
@@ -77,7 +77,7 @@ public class UserDaoImplTest {
 		
 		var result = new ArrayList<User>();
 		
-		var stmt = conn.prepareStatement("select is, name from user where minId >= ? and maxId <= ?");
+		var stmt = conn.prepareStatement("select id, name from user where id >= ? and id <= ?");
 		stmt.setInt(1, minId);
 		stmt.setInt(2, maxId);
 		
@@ -106,8 +106,17 @@ public class UserDaoImplTest {
 		}
 		
 		var maxId = getMaxId();
+		//System.out.println(maxId);
 		
-		System.out.println(maxId);
+		for(int i = 0; i < users.size(); i++) {
+			int id = maxId - users.size() + 1 + i;
+			users.get(i).setId(id);
+		}
+		
+		var retrievedUsers = getUsersInRange(maxId - users.size() + 1, maxId);
+		
+		assertEquals("inapropriate size!", retrievedUsers.size(), NUM_TEST_USERS);
+		assertEquals("users are not the same!", users, retrievedUsers);
 	}
 	
 	@Test
