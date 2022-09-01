@@ -98,6 +98,35 @@ public class UserDaoImplTest {
 	}
 	
 	@Test
+	public void testFindAndUpdate() throws SQLException {
+		var user = users.get(0);// user with ID=0 
+		//System.out.println(user);
+		UserDao userDao = new UserDaoImpl();
+		
+		userDao.save(user);// saving user in a database which automatically gives it last ID 
+		
+		var maxId = getMaxId();// getting an ID of our last added user
+		//System.out.println(maxId);
+		user.setId(maxId); //now user in our app has the same Id as in database 
+		//System.out.println(user);
+		
+		var retrievedUserOpt = userDao.findById(maxId);
+		assertTrue("no user retrieved", retrievedUserOpt.isPresent());
+		var retrievedUser = retrievedUserOpt.get();
+		//System.out.println(retrievedUser);
+		assertEquals("retrieved user doesn't match saved user", user, retrievedUser);
+		
+		user.setName("abcd");
+		userDao.update(user);
+		
+		retrievedUserOpt = userDao.findById(maxId);
+		assertTrue("no user retrieved after update", retrievedUserOpt.isPresent());
+		retrievedUser = retrievedUserOpt.get();
+		System.out.println(retrievedUser);
+		assertEquals("retrieved user doesn't match updated user", user, retrievedUser);
+	}
+	
+	@Test
 	public void testSaveMultiple() throws SQLException {
 		UserDao userDao = new UserDaoImpl();
 		
