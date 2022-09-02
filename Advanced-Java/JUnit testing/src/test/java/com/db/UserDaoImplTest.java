@@ -120,7 +120,7 @@ public class UserDaoImplTest {
 		userDao.update(user);
 		
 		retrievedUserOpt = userDao.findById(maxId);
-		assertTrue("no user retrieved after update", retrievedUserOpt.isPresent());
+		assertTrue("no user retrieved after update  ", retrievedUserOpt.isPresent());
 		retrievedUser = retrievedUserOpt.get();
 		System.out.println(retrievedUser);
 		assertEquals("retrieved user doesn't match updated user", user, retrievedUser);
@@ -146,6 +146,29 @@ public class UserDaoImplTest {
 		
 		assertEquals("inapropriate size!", retrievedUsers.size(), NUM_TEST_USERS);
 		assertEquals("users are not the same!", users, retrievedUsers);
+	}
+	
+	@Test
+	public void testGetAll() throws SQLException {
+		UserDao userDao = new UserDaoImpl();
+		
+		for(var u: users) {
+			userDao.save(u);
+		}
+		
+		var maxId = getMaxId();
+		//System.out.println(maxId);
+		
+		for(int i = 0; i < users.size(); i++) {
+			int id = maxId - users.size() + 1 + i;
+			users.get(i).setId(id);
+		}
+		
+		var dbUsers = userDao.getAll();
+		dbUsers = dbUsers.subList(dbUsers.size() - users.size(), dbUsers.size());		
+		
+		assertEquals("inapropriate size!", dbUsers.size(), NUM_TEST_USERS);
+		assertEquals("users are not the same!", users, dbUsers);
 	}
 	
 	@Test
