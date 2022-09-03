@@ -22,7 +22,7 @@ public class UserDaoImplTest {
 	private Connection conn;
 	private List<User> users;
 	
-	private static int NUM_TEST_USERS = 1000;
+	private static int NUM_TEST_USERS = 4;
 	
 	private List<User> loadUsers() throws IOException {
 		return Files
@@ -145,6 +145,37 @@ public class UserDaoImplTest {
 		var retrievedUsers = getUsersInRange(maxId - users.size() + 1, maxId);
 		
 		assertEquals("inapropriate size!", retrievedUsers.size(), NUM_TEST_USERS);
+		assertEquals("users are not the same!", users, retrievedUsers);
+	}
+	
+	@Test
+	public void testDelete() throws SQLException {
+		UserDao userDao = new UserDaoImpl();
+		
+		for(var u: users) {
+			userDao.save(u);
+		}
+		
+		var maxId = getMaxId();
+		//System.out.println(maxId);
+		
+		for(int i = 0; i < users.size(); i++) {
+			int id = maxId - users.size() + 1 + i;
+			users.get(i).setId(id);
+		}
+		
+		var deleteUserIndex = NUM_TEST_USERS / 2;
+		var deleteUser = users.get(deleteUserIndex);
+		users.remove(deleteUser);
+		System.out.println(deleteUser);
+		System.out.println(users);
+		userDao.delete(deleteUser);
+		
+		
+		var retrievedUsers = getUsersInRange(maxId - NUM_TEST_USERS + 1, maxId);
+		System.out.println(retrievedUsers);
+		
+		assertEquals("inapropriate size!", retrievedUsers.size(), users.size());
 		assertEquals("users are not the same!", users, retrievedUsers);
 	}
 	
