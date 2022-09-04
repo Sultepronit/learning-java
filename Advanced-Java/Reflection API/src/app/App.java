@@ -44,20 +44,26 @@ public class App {
 		var nameField = clazz.getField("name");
 		System.out.println(nameField);
 		
+		// a specific field & method
 		System.out.println();
 		var calculateMethod = clazz.getDeclaredMethod("calculate");
 		System.out.println(calculateMethod);
 		var setUpdatedMethod = clazz.getMethod("setUpdated", Date.class, int.class);
 		System.out.println(setUpdatedMethod);
 		
+		// whether a method exists 
 		var methodExists = Arrays.stream(clazz.getDeclaredMethods()).anyMatch(m -> m.getName().equals("setUpdated"));
 		System.out.println(methodExists);
 		
+		// caling methods
 		var doSomethingMethod = clazz.getDeclaredMethod("doSomething", int.class);
 		doSomethingMethod.invoke(new Employee(), 3);
 		
 		calculateMethod.setAccessible(true);
 		calculateMethod.invoke(new Employee());
+		
+		// setting fields
+		
 		
 	}
 
