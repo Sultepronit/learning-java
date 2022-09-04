@@ -23,6 +23,11 @@ class Employee extends User {
 	public void doSomething(int i) {
 		System.out.println("Working! " + i);
 	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + "]";
+	}
 }
 
 public class App {
@@ -63,7 +68,15 @@ public class App {
 		calculateMethod.invoke(new Employee());
 		
 		// setting fields
+		var user = new Employee();
+		// nameField = clazz.getField("name");
+		nameField.set(user, "Poseidon");
+		System.out.println(user);
 		
+		var idField = clazz.getDeclaredField("id");
+		idField.setAccessible(true);
+		idField.set(user, 7);
+		System.out.println(user);
 		
 	}
 
