@@ -1,5 +1,6 @@
 package app;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -12,17 +13,21 @@ class Employee extends User {
 	public String name;
 	
 	private void calculate() {
-		
+		System.out.println("Calculated all!");
 	}
 	
 	public boolean setUpdated(Date updated, int index) {
 		return true;
 	}
+	
+	public void doSomething(int i) {
+		System.out.println("Working! " + i);
+	}
 }
 
 public class App {
 
-	public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, SecurityException, NoSuchMethodException {
+	public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		Class<Employee> clazz = Employee.class;
 		System.out.println(clazz);
@@ -47,6 +52,12 @@ public class App {
 		
 		var methodExists = Arrays.stream(clazz.getDeclaredMethods()).anyMatch(m -> m.getName().equals("setUpdated"));
 		System.out.println(methodExists);
+		
+		var doSomethingMethod = clazz.getDeclaredMethod("doSomething", int.class);
+		doSomethingMethod.invoke(new Employee(), 3);
+		
+		calculateMethod.setAccessible(true);
+		calculateMethod.invoke(new Employee());
 		
 	}
 
