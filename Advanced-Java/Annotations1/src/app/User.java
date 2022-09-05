@@ -1,8 +1,9 @@
 package app;
 
 public class User {
-	@Field
-	@Deprecated
+	//@Field("id") if there is only value
+	//@Field(true) if there is only isKey
+	@Field(value="id", isKey=true)
 	private Long id;
 	
 	@Field
