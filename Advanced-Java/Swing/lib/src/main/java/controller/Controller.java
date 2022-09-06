@@ -12,7 +12,7 @@ public class Controller {
 	public Controller() {
 		mainPanel = new MainPanel();
 		mainFrame = new MainFrame();
-		myFrame = new MyFrame();
+		//myFrame = new MyFrame();
 		
 		mainFrame.setContentPane(mainPanel);
 	}

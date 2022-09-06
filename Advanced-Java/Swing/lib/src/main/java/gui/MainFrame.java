@@ -15,8 +15,8 @@ public class MainFrame extends JFrame {
 		setJMenuBar(createMenu());
 		
 		setSize(1000, 800); 
-		//setDefaultCloseOperation(EXIT_ON_CLOSE); //clothes app when main window is closed
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE); // works more efficiently?
+		setDefaultCloseOperation(EXIT_ON_CLOSE); //closes app when main window is closed
+		//setDefaultCloseOperation(DISPOSE_ON_CLOSE); // closes only a window
 		setVisible(true);// shows the window
 	}
 	
