@@ -10,17 +10,27 @@ public class Repository<T> {
 		
 		var fields = clazz.getDeclaredFields();
 		
-		for(var field: fields) {
+		/*for(var field: fields) {
 			var annotations = field.getDeclaredAnnotationsByType(Field.class);
 			System.out.println(Arrays.asList(annotations));
 			if(annotations.length > 0) System.out.println(field);
-		}
+		}*/
 		
-		var fieldList = Arrays
+		/*var fieldList = Arrays
 			.stream(fields)
 			.filter(f -> f.getAnnotationsByType(Field.class).length > 0)
 			.collect(Collectors.toList());
 		System.out.println();
-		System.out.println(fieldList);
+		System.out.println(fieldList);*/
+		for(var field: fields) {
+			var annotations = field.getDeclaredAnnotationsByType(Field.class);
+			if(annotations.length == 0) continue;
+			
+			var annotation = annotations[0];
+			var fieldName = annotation.value();
+			var isKey = annotation.isKey();
+			if(fieldName.length() == 0) fieldName = field.getName();
+			System.out.println(fieldName + " " + isKey);
+		}
 	}
 }
