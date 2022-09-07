@@ -42,14 +42,14 @@ public class Music2 {
 	
 	public void play2() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		System.out.println("ke!");
-		SoundPlayerUsingJavaZoom player = new SoundPlayerUsingJavaZoom();
+		/*SoundPlayerUsingJavaZoom player = new SoundPlayerUsingJavaZoom();
 		{
 			  AudioInputStream audioInputStream =AudioSystem.getAudioInputStream(this.getClass().getResource("file_example.mp3"));
 			  Clip clip = AudioSystem.getClip();
 			  clip.open(audioInputStream);
 			  System.out.println("ke!!!");
 			  clip.start( );
-		}
+		}*/
 		
 	}
 }

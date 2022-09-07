@@ -7,7 +7,7 @@ public class PlayMP3 {
 
         try {
 
-            File f = new File("example.mp3");
+            File f = new File("file_example.mp3");
 
             MP3Player mp3Player = new MP3Player(f);
             mp3Player.play();
@@ -19,3 +19,4 @@ public class PlayMP3 {
             System.err.println(e.getMessage());
         }
     }
+}
