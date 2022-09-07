@@ -8,6 +8,15 @@ public class Repository<T> {
 		//System.out.println(t);
 		var clazz = t.getClass();
 		
+		var classAnnotations = clazz.getAnnotationsByType(Entity.class);
+		
+		var tableName = clazz.getSimpleName().toLowerCase();
+		System.out.println(tableName);
+		
+		if(classAnnotations.length > 0 && classAnnotations[0].value().length() > 0) {
+			tableName = classAnnotations[0].value();
+		}
+		
 		var fields = clazz.getDeclaredFields();
 		
 		/*for(var field: fields) {
@@ -27,7 +36,7 @@ public class Repository<T> {
 			if(annotations.length == 0) continue;
 			
 			var annotation = annotations[0];
-			var fieldName = annotation.value();
+			var fieldName = annotation.columnName();
 			var isKey = annotation.isKey();
 			if(fieldName.length() == 0) fieldName = field.getName();
 			System.out.println(fieldName + " " + isKey);

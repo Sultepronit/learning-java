@@ -1,9 +1,10 @@
 package app;
 
+@Entity("user")
 public class User {
 	//@Field("id") if there is only value
 	//@Field(true) if there is only isKey
-	@Field(value="id", isKey=true)
+	@Field(columnName="id", isKey=true)
 	private Long id;
 	
 	@Field
