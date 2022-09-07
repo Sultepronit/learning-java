@@ -1,3 +1,7 @@
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;    
 class TableExample {    
     JFrame f;    
@@ -21,7 +25,34 @@ class TableExample {
 public class App {
 
 	public static void main(String[] args) {
-		 new TableExample();  
+		 new TableExample();
+		 //var music = new Music();
+		 //music.setFile("https://file-examples.com/storage/fe7d3a0d44631509da1f416/2017/11/file_example_MP3_5MG.mp3");
+		 //music.setFile("file_example.mp3");
+		 //music.play();
+		 //new Music2().play("");
+		 
+		 //Music2.play("");
+		 
+		 /*try {
+			Music2.play();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		 
+		 try {
+			new Music2().play2();
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
