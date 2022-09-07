@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -20,7 +21,8 @@ public class MainPanel extends JPanel {
 		var passLabel = new JLabel("Password:");
 		
 		var nameField = new JTextField(15);//15 characters long
-		var passField = new JTextField(15);
+		var passField = new JTextField("しおり");
+		passField.setFont(new Font("Serif", 30, 90));
 		
 		var addButton = new JButton("Save");
 		
