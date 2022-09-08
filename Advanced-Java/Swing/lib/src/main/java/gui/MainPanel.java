@@ -25,7 +25,7 @@ public class MainPanel extends JPanel {
 		
 		var nameField = new JTextField(15);//15 characters long
 		//nameField.setFont(new Font("Serif", 20, 40));
-		var passField = new JTextField("媒鳥");
+		var passField = new JTextField(15);
 		//passField.setFont(new Font("FreeSans", 40, 40));
 		
 		var addButton = new JButton("Save");
