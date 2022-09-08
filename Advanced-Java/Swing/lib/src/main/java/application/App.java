@@ -7,7 +7,7 @@ import controller.Controller;
 public class App {
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(Controller::new);;
+		SwingUtilities.invokeLater(Controller::new);
 
 	}
 
