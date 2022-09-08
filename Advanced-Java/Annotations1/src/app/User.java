@@ -10,6 +10,9 @@ public class User {
 	@Field
 	private String name;
 	
+	@Field
+	private String password;
+	
 	private int sequense;
 	
 	public User(Long id, String name) {
