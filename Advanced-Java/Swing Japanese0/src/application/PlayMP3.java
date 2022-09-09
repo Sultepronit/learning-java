@@ -21,6 +21,7 @@ public class PlayMP3 {
             //MP3Player mp3Player = new MP3Player(f);
             MP3Player mp3Player = new MP3Player(url);
             mp3Player.play();
+            //mp3Player.
 
             /*while (!mp3Player.isStopped()) {
                 Thread.sleep(5000);
