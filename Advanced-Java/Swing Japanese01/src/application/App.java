@@ -7,6 +7,7 @@ import gui.WordKanjiPanel;
 
 class Controller {
 	private static MainFrame mainFrame;
+	//public static MainFrame mainFrame;
 	private static WordKanjiPanel wordsPanel;
 	
 	public Controller() {
@@ -24,6 +25,7 @@ public class App {
 		//Controller controller = new Controller();
 		//SwingUtilities.invokeLater(controller);
 		SwingUtilities.invokeLater(Controller::new);
+		//System.out.println(Controller.mainFrame.getContentPane().getSize());
 
 	}
 

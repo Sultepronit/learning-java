@@ -1,15 +1,15 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.JTextComponent;
 
 import Database0.WordArray0;
 
@@ -58,18 +58,42 @@ public class WordPanel extends JPanel {
 		transcriptionLabel.setForeground(Color.black);
 		
 		gc.gridy++;
-		//gc.fill = GridBagConstraints.HORIZONTAL;
-		//gc.fill = GridBagConstraints.BOTH;
-		//gc.fill = GridBagConstraints.LINE_START; //center
-		//gc.fill = GridBagConstraints.NONE;
-		//gc.fill = GridBagConstraints.RELATIVE;
-		//gc.fill = GridBagConstraints.PAGE_END;
-		gc.fill = GridBagConstraints.REMAINDER;
+		gc.fill = GridBagConstraints.HORIZONTAL;
 		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
 		add(translationLabel, gc);
 		translationLabel.setForeground(Color.black);
 		
-		add(new JLabel("#####"), gc);
+		/*gc.gridy++;
+		//gc.fill = GridBagConstraints.HORIZONTAL;
+		gc.fill = GridBagConstraints.CENTER;
+		var transPanel = new JPanel();
+		transPanel.setBackground(Color.white);
+		transPanel.setBorder(BorderFactory.createEtchedBorder());
+		transPanel.setLayout(new GridBagLayout());
+		add(transPanel, gc);
+		transPanel.getSize();
+		//System.out.println(mainFrame.getContentPane().getSize());
+		
+		var nc = new GridBagConstraints();
+		nc.gridx = 0;
+		nc.gridy = 0;
+		//nc.fill = GridBagConstraints.HORIZONTAL;
+		//nc.fill = GridBagConstraints.BASELINE;
+		//nc.fill = GridBagConstraints.CENTER;
+		transPanel.add(translationLabel, gc);
+		translationLabel.setBorder(BorderFactory.createEtchedBorder());
+		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
+		translationLabel.setForeground(Color.black);*/
+		
+		//translationLabel.setPreferredSize(new Dimension(250, 100));
+		//translationLabel.setSize(transPanel.getSize());
+		/*translationLabel.isMaximumSizeSet();
+		System.out.println(translationLabel.isMaximumSizeSet());
+		translationLabel.setMaximumSize(getMaximumSize());
+		System.out.println(translationLabel.isMaximumSizeSet());
+		translationLabel.setSize(2000, 100);*/
+		
+		//add(new JLabel("#####"), gc);
 		/*gc.gridx++;
 		add(new JLabel("#####"), gc);*/
 		
@@ -128,7 +152,9 @@ public class WordPanel extends JPanel {
 		transcriptionLabel.setText(WordArray0.words0[x][1][0]);
 		translationLabel.setText("<html><p style='font-family:\"FreeSerif\"; text-align:center; background-color:yellow '>"
 		//translationLabel.setText("<html>"
-		+ WordArray0.words0[x][2][0] + "</p></html>");
+		+ WordArray0.words0[x][2][0] + "</p><p>-</p></html>");
+		//+ WordArray0.words0[x][2][0] + "</p><p style='width:1500'>wwwwwwwwwwwsdfudwwwwwwwwwwwwwwwwd</p></html>");
+		//+ WordArray0.words0[x][2][0] + "</p><p style='color:white'>kasd fasdfa sdfasdfaswwwwwwwwwwwdfasdfasdfasdfudwwwwww wwwwwww wwwd</p></html>");
 		//translationLabel.setText(WordArray0.words0[x][2][0]);
 		//PlayMP3.play();
 		/*PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="

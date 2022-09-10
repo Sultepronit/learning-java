@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
-		
+		System.out.println(getContentPane().getSize());
 		
 	}
 	
