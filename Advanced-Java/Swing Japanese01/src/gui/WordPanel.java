@@ -6,11 +6,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Random;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.text.JTextComponent;
 
-import application.PlayMP3;
+import Database0.WordArray0;
 
 public class WordPanel extends JPanel {
 
@@ -22,7 +23,7 @@ public class WordPanel extends JPanel {
 	public static JLabel translationLabel = new JLabel("");
 	
 	public WordPanel() {
-		setBackground(Color.white);
+		//setBackground(Color.white);
 		//setBorder(BorderFactory.createEtchedBorder());
 		
 		var getKey = new GetKey();
@@ -57,9 +58,26 @@ public class WordPanel extends JPanel {
 		transcriptionLabel.setForeground(Color.black);
 		
 		gc.gridy++;
-		translationLabel.setFont(new Font("FreeSerif", Font.PLAIN, 40));
+		//gc.fill = GridBagConstraints.HORIZONTAL;
+		//gc.fill = GridBagConstraints.BOTH;
+		//gc.fill = GridBagConstraints.LINE_START; //center
+		//gc.fill = GridBagConstraints.NONE;
+		//gc.fill = GridBagConstraints.RELATIVE;
+		//gc.fill = GridBagConstraints.PAGE_END;
+		gc.fill = GridBagConstraints.REMAINDER;
+		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
 		add(translationLabel, gc);
 		translationLabel.setForeground(Color.black);
+		
+		add(new JLabel("#####"), gc);
+		/*gc.gridx++;
+		add(new JLabel("#####"), gc);*/
+		
+		/*gc.gridy++;
+		//var transl = new JTextPane();
+		//var transl = new JText
+		add(transl, gc);
+		transl.setText("dasdas");*/
 		
 		
 		/*gc.gridy++;
@@ -85,8 +103,10 @@ public class WordPanel extends JPanel {
 	};
 	
 	public static void changeContents0() {
+		System.out.println(WordArray0.words0[12][0][0]);
 		Random random = new Random();
 		int i = random.nextInt(3);
+		int x = random.nextInt(WordArray0.words0.length);
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
 		char c = words[i][0].charAt(0);
@@ -100,16 +120,19 @@ public class WordPanel extends JPanel {
 				+ "<p style='font-family:\"Noto Serif CJK JP\"; text-align:center'>"
 				//+ "<p style='font-family:\"Noto Serif CJK JP\"; font-size:7em; text-align:center'>"
 				//+ "<p style='font-family:\"VL PGothic\"; font-size:7em; text-align:center'>"
-				+words[i][0] + "</p></html>");
+				//+words[i][0] + "</p></html>");
+				+WordArray0.words0[x][0][0] + "</p></html>");
+				
 		//wordLabel.setBackground(Color.YELLOW);
 		//wordLabel.setForeground(Color.RED);VL PGothic
-		transcriptionLabel.setText(words[i][1]);
-		//translationLabel.setText("<html><p style='font-family:\"FreeSerif\" '>"
-		translationLabel.setText("<html><p style='color:blue'>"
-		+ words[i][2] + "</p></html>");
+		transcriptionLabel.setText(WordArray0.words0[x][1][0]);
+		translationLabel.setText("<html><p style='font-family:\"FreeSerif\"; text-align:center; background-color:yellow '>"
+		//translationLabel.setText("<html>"
+		+ WordArray0.words0[x][2][0] + "</p></html>");
+		//translationLabel.setText(WordArray0.words0[x][2][0]);
 		//PlayMP3.play();
-		PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-				+ words[i][1] + "&kanji=" + words[i][0]);
+		/*PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
+				+ words[i][1] + "&kanji=" + words[i][0]);*/
 	}
 
 }

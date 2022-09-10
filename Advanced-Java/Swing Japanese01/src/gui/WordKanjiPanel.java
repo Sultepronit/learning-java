@@ -81,6 +81,7 @@ public class WordKanjiPanel extends JPanel {
 		var nc = new GridBagConstraints();
 		nc.gridx = 0;
 		nc.gridy = 0;
+		nc.fill = GridBagConstraints.HORIZONTAL;
 		var wordPanel = new WordPanel();
 		whitePanel.add(wordPanel, nc);
 		/*var wordPanel = new WordPanel();
@@ -88,7 +89,7 @@ public class WordKanjiPanel extends JPanel {
 		
 		nc.gridy++;
 		nc.weightx = 3;
-		nc.fill = GridBagConstraints.HORIZONTAL;
+		//nc.fill = GridBagConstraints.HORIZONTAL;
 		var kanjiPanel = new KanjiPanel();
 		whitePanel.add(kanjiPanel, nc);
 		
