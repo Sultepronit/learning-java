@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -7,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -66,13 +68,40 @@ public class WordKanjiPanel extends JPanel {
 		
 		
 		gc.weightx = 3;
-		//gc.gridwidth = 2;
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		//gc.insets = new Insets(0,20,0,20);
 		//gc.anchor = GridBagConstraints.CENTER;
 		gc.gridy++;
+		var whitePanel = new JPanel();
+		whitePanel.setBackground(Color.white);
+		whitePanel.setBorder(BorderFactory.createEtchedBorder());
+		whitePanel.setLayout(new GridBagLayout());
+		add(whitePanel, gc);
+		
+		var nc = new GridBagConstraints();
+		nc.gridx = 0;
+		nc.gridy = 0;
 		var wordPanel = new WordPanel();
-		add(wordPanel, gc);
+		whitePanel.add(wordPanel, nc);
+		/*var wordPanel = new WordPanel();
+		add(wordPanel, gc);*/
+		
+		nc.gridy++;
+		nc.weightx = 3;
+		nc.fill = GridBagConstraints.HORIZONTAL;
+		var kanjiPanel = new KanjiPanel();
+		whitePanel.add(kanjiPanel, nc);
+		
+		/*whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
+		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
+		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
+		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
+		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));*/
 		
 		gc.gridy++;
 		//gc.gridx++;
@@ -82,43 +111,6 @@ public class WordKanjiPanel extends JPanel {
 		gc.anchor = GridBagConstraints.LAST_LINE_END;
 		add(new JLabel("#####"), gc);
 		
-	}
-	
-	public static String[][] words = {
-			{"怪しい", "あやしい", "сумнівний, підозрілий"},
-			{"趣味", "しゅみ", "інтерес, хобі, захоплення"},	
-			{"燃える", "もえる", "горіти, палати <i>прям. і перен.</i>"},	
-	};
-	
-	public static void changeContents0() {
-		String word = "怪しい";
-		String transc = "あやしい";
-		String transl = "сумнівний, підозрілий";
-		Random random = new Random();
-		int i = random.nextInt(3);
-		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
-		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
-		char c = words[i][0].charAt(0);
-		System.out.println(c);
-		System.out.println(Integer.toHexString((int) c));
-		String sc = Integer.toHexString((int) c).toUpperCase();
-		System.out.println("http://www.yosida.com/images/kanji/" + sc + ".gif");
-		wordLabel.setText("<html>"
-				+ "<img src='http://www.yosida.com/images/kanji/" + sc + ".gif'>"
-				+ "<img src='http://www.yosida.com/images/kanji/8336.gif'>"
-				+ "<p style='font-family:\"Noto Serif CJK JP\"; text-align:center'>"
-				//+ "<p style='font-family:\"Noto Serif CJK JP\"; font-size:7em; text-align:center'>"
-				//+ "<p style='font-family:\"VL PGothic\"; font-size:7em; text-align:center'>"
-				+words[i][0] + "</p></html>");
-		//wordLabel.setBackground(Color.YELLOW);
-		//wordLabel.setForeground(Color.RED);VL PGothic
-		transcriptionLabel.setText(words[i][1]);
-		//translationLabel.setText("<html><p style='font-family:\"FreeSerif\" '>"
-		translationLabel.setText("<html><p style='color:blue'>"
-		+ words[i][2] + "</p></html>");
-		//PlayMP3.play();
-		PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-				+ words[i][1] + "&kanji=" + words[i][0]);
 	}
 
 }

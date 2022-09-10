@@ -23,7 +23,7 @@ public class WordPanel extends JPanel {
 	
 	public WordPanel() {
 		setBackground(Color.white);
-		setBorder(BorderFactory.createEtchedBorder());
+		//setBorder(BorderFactory.createEtchedBorder());
 		
 		var getKey = new GetKey();
 		
