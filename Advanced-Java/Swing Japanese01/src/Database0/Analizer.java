@@ -1,11 +1,25 @@
 package Database0;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Analizer {
 
 	public static void main(String[] args) {
+		
+		try {
+			System.out.println("before");
+			FileWriter writer = new FileWriter("Test.txt");
+			writer.write("Hello!");
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("else");
+			e.printStackTrace();
+		}
+		System.out.println("after");
+		
 		Random random = new Random();
 		int x = random.nextInt(WordArray0.words0.length);
 		//System.out.println(WordArray0.words0[x][0][0]);
@@ -65,7 +79,7 @@ public class Analizer {
 			}*/
 			/////////////////transcription
 			transcList = Arrays.asList(WordArray0.words0[i][1]);
-			System.out.println(transcList);
+			//System.out.println(transcList);
 			isAdditional = false;
 			var mainTranscriptions = new StringBuilder();
 			j = 0;
@@ -85,6 +99,26 @@ public class Analizer {
 				mainTranscriptions.append(", ");
 			}
 			System.out.println(mainTranscriptions);
+			
+			var additionalTranscriptions = new StringBuilder();
+			if(isAdditional) {
+				System.out.print("{} ");
+				j += 2;
+			
+				for(; j < WordArray0.words0[i][1].length; j++) {
+	
+					additionalTranscriptions.append(WordArray0.words0[i][1][j]);
+					
+					if(j + 1 == WordArray0.words0[i][1].length) break;
+					additionalTranscriptions.append(", ");
+				}
+				var at = additionalTranscriptions.toString();
+				String at2 = at; 
+				if(at.charAt(at.length() - 1) == ')') {
+					at2 = at.substring(0, at.length() - 1);
+				}
+				System.out.println(at2);
+			}
 			
 			System.out.println();
 			
