@@ -5,20 +5,49 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Analizer {
-
-	public static void main(String[] args) {
-		
+class Writer {
+	private static FileWriter writer;
+	
+	public Writer() throws IOException {
+		writer = new FileWriter("Test.txt");
+		writer.write("start\n");
+	}
+	
+	public static void write(String s) {
 		try {
 			System.out.println("before");
-			FileWriter writer = new FileWriter("Test.txt");
-			writer.write("Hello!");
-			writer.close();
+			
+			writer.write(s);
+			//writer.close();
 		} catch (IOException e) {
 			System.out.println("else");
 			e.printStackTrace();
 		}
 		System.out.println("after");
+	}
+	
+	public static void close() {
+		try {
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+public class Analizer {
+
+	public static void main(String[] args) {
+		
+		Writer writer;
+		try {
+			writer = new Writer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Writer.write("ke");
 		
 		Random random = new Random();
 		int x = random.nextInt(WordArray0.words0.length);
@@ -37,7 +66,7 @@ public class Analizer {
 			var isAdditional = false;
 			var isBrackets = false;
 			int j = 0;
-			/*for(; j < WordArray0.words0[i][0].length; j++) {
+			for(; j < WordArray0.words0[i][0].length; j++) {
 				if(WordArray0.words0[i][0][j] == "[") {
 					isUsed = true;
 					System.out.print("[] ");
@@ -58,6 +87,8 @@ public class Analizer {
 			}
 			if(isBrackets) mainWritings.insert(0, "<");
 			System.out.println(mainWritings);
+			Writer.write(mainWritings.toString());
+			Writer.write("\n");
 			
 			if(isAdditional) {
 				isBrackets = false;
@@ -76,7 +107,7 @@ public class Analizer {
 				}
 				if(isBrackets) additionalWritings.insert(0, "<");
 				System.out.println(additionalWritings);
-			}*/
+			}
 			/////////////////transcription
 			transcList = Arrays.asList(WordArray0.words0[i][1]);
 			//System.out.println(transcList);
@@ -123,6 +154,7 @@ public class Analizer {
 			System.out.println();
 			
 		}
+		Writer.close();
 	}
 
 }
