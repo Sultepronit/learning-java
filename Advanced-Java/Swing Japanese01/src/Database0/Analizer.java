@@ -10,27 +10,21 @@ class Writer {
 	
 	public Writer() throws IOException {
 		writer = new FileWriter("Test.txt");
-		writer.write("start\n");
+		//writer.write("start\n");
 	}
 	
 	public static void write(String s) {
 		try {
-			System.out.println("before");
-			
 			writer.write(s);
-			//writer.close();
 		} catch (IOException e) {
-			System.out.println("else");
 			e.printStackTrace();
 		}
-		System.out.println("after");
 	}
 	
 	public static void close() {
 		try {
 			writer.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -40,9 +34,10 @@ public class Analizer {
 
 	public static void main(String[] args) {
 		
-		Writer writer;
+		//Writer writer;
 		try {
-			writer = new Writer();
+			//writer = new Writer();
+			new Writer();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,18 +57,24 @@ public class Analizer {
 			wordList = Arrays.asList(WordArray0.words0[i][0]);
 			//System.out.println(wordList);
 			var mainWritings = new StringBuilder();
-			var isUsed = false;
 			var isAdditional = false;
 			var isBrackets = false;
 			int j = 0;
+			
+			if(WordArray0.words0[i][0][0] == "[") {
+				j++;
+				Writer.write("false");
+				Writer.write("\n");
+				System.out.print("[] ");
+			}
+			else {
+				Writer.write("true");
+				Writer.write("\n");
+			}
 			for(; j < WordArray0.words0[i][0].length; j++) {
-				if(WordArray0.words0[i][0][j] == "[") {
-					isUsed = true;
-					System.out.print("[] ");
-					continue;
-				}
 				if(WordArray0.words0[i][0][j] == "1") {
-					isBrackets = true;
+					//isBrackets = true;
+					mainWritings.append("<");
 					continue;
 				}
 				mainWritings.append(WordArray0.words0[i][0][j]);
@@ -85,19 +86,20 @@ public class Analizer {
 				}
 				mainWritings.append(", ");
 			}
-			if(isBrackets) mainWritings.insert(0, "<");
+			//if(isBrackets) mainWritings.insert(0, "<");
 			System.out.println(mainWritings);
 			Writer.write(mainWritings.toString());
 			Writer.write("\n");
 			
+			var additionalWritings = new StringBuilder();
 			if(isAdditional) {
 				isBrackets = false;
 				System.out.print("() ");
 				j += 2;
-				var additionalWritings = new StringBuilder();
 				for(; j < WordArray0.words0[i][0].length; j++) {
 					if(WordArray0.words0[i][0][j] == "1") {
-						isBrackets = true;
+						//isBrackets = true;
+						additionalWritings.append("<");
 						continue;
 					}
 					additionalWritings.append(WordArray0.words0[i][0][j]);
@@ -105,9 +107,12 @@ public class Analizer {
 					if(j + 1 == WordArray0.words0[i][0].length) break;
 					additionalWritings.append(", ");
 				}
-				if(isBrackets) additionalWritings.insert(0, "<");
+				//if(isBrackets) additionalWritings.insert(0, "<");
 				System.out.println(additionalWritings);
 			}
+			Writer.write(additionalWritings.toString());
+			Writer.write("\n");
+			
 			/////////////////transcription
 			transcList = Arrays.asList(WordArray0.words0[i][1]);
 			//System.out.println(transcList);
@@ -130,6 +135,8 @@ public class Analizer {
 				mainTranscriptions.append(", ");
 			}
 			System.out.println(mainTranscriptions);
+			Writer.write(mainTranscriptions.toString());
+			Writer.write("\n");
 			
 			var additionalTranscriptions = new StringBuilder();
 			if(isAdditional) {
@@ -150,6 +157,11 @@ public class Analizer {
 				}
 				System.out.println(at2);
 			}
+			System.out.println(additionalTranscriptions);
+			Writer.write(additionalTranscriptions.toString());
+			Writer.write("\n");
+			Writer.write(WordArray0.words0[i][2][0]);
+			Writer.write("\n");
 			
 			System.out.println();
 			
