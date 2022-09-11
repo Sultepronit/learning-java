@@ -127,7 +127,7 @@ public class WordPanel extends JPanel {
 	};
 	
 	public static void changeContents0() {
-		System.out.println(WordArray0.words0[12][0][0]);
+		//System.out.println(WordArray0.words0[12][0][0]);
 		Random random = new Random();
 		int i = random.nextInt(3);
 		int x = random.nextInt(WordArray0.words0.length);
