@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.JLabel;
@@ -18,6 +20,7 @@ public class WordPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	//public static JLabel wordLabel = new JLabel("word");
+	public static JLabel kanjiLabel = new JLabel("");
 	public static JLabel wordLabel = new JLabel("");
 	public static JLabel transcriptionLabel = new JLabel("");
 	public static JLabel translationLabel = new JLabel("");
@@ -37,7 +40,11 @@ public class WordPanel extends JPanel {
 		//gc.anchor = GridBagConstraints.CENTER;
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		
-		//gc.gridy++;
+		add(kanjiLabel, gc);
+		kanjiLabel.setForeground(Color.black);
+		kanjiLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		
+		gc.gridy++;
 		//gc.weighty = 1;
 		add(wordLabel, gc);
 		Font word1 = new Font("Arial", Font.PLAIN, 100);
@@ -66,6 +73,13 @@ public class WordPanel extends JPanel {
 		Random random = new Random();
 		int x = random.nextInt(WordArray0.words0.length);
 		System.out.println(ReadFile.words1.get(x).getWritings());
+		
+		//char[] kanjis = ReadFile.words1.get(x).getAllKanji();
+		var kanjis = ReadFile.words1.get(x).getAllKanji();
+		/*var builder = new StringBuilder();
+		builder.append(kanjis);*/
+		kanjiLabel.setText(kanjis.toString());
+
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
 		char c = ReadFile.words1.get(x).getWritings().charAt(0);
@@ -94,10 +108,12 @@ public class WordPanel extends JPanel {
 		//+ WordArray0.words0[x][2][0] + "</p><p style='width:1500'>wwwwwwwwwwwsdfudwwwwwwwwwwwwwwwwd</p></html>");
 		//+ WordArray0.words0[x][2][0] + "</p><p style='color:white'>kasd fasdfa sdfasdfaswwwwwwwwwwwdfasdfasdfasdfudwwwwww wwwwwww wwwd</p></html>");
 		//translationLabel.setText(WordArray0.words0[x][2][0]);
-		//PlayMP3.play();
-		/*PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-				+ words[i][1] + "&kanji=" + words[i][0]);*/
 		ReadFile.words1.get(x).say();
+	}
+	
+	private static String kanjiToGif() {
+		
+		return null;
 	}
 
 }

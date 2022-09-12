@@ -2,6 +2,7 @@ package Database0;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import application.PlayMP3;
 
@@ -52,6 +53,34 @@ public class Word {
 		return result.toString();
 	}
 	
+	//public char[] getAllKanji() {
+	public LinkedHashSet<Character> getAllKanji() {
+		var builder = new StringBuilder();
+		for(int i = 0; i < mainWritings.length; i++) {
+			builder.append(mainWritings[i]);
+		}
+		for(int i = 0; i < additionalWritings.length; i++) {
+			builder.append(additionalWritings[i]);
+		}
+		//builder.replace(id, example, translation)
+		//builder.toString().replace("[あ-ん]", "");
+		//return builder.toString().replace("[あ-゜]", "").toCharArray();
+		//return builder.toString().replace("る", "").toCharArray();
+		var string =  builder.toString();
+		//builder.delete(id, example);
+		var set = new LinkedHashSet<Character>();
+		var builder2 = new StringBuilder();
+		for(char c: string.toCharArray()) {
+			//if(c > 'ん') builder2.append(c);
+			//if(c > '゜') set.add(c);
+			if(c > 'ヶ') set.add(c);
+			
+		}
+		var array = builder2.toString().toCharArray();
+		return set;
+		
+	}
+	
 	public String getTranscriptions() {
 		var result = new StringBuilder();
 		for(int i = 0; i < mainTranscriptions.length; i++) {
@@ -79,8 +108,6 @@ public class Word {
 					+ mainTranscriptions[i] + "&kanji=" + mainWritings[0];
 		}
 		PlayMP3.play(list);
-		/*PlayMP3.play("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-				+ mainTranscriptions[0] + "&kanji=" + mainWritings[0]);*/
 	}
 
 	@Override
