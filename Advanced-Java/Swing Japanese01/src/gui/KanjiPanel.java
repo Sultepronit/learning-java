@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 public class KanjiPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	public static JLabel kanjiText = new JLabel("企企");
-	public static JLabel kanjiGif = new JLabel("<html><img src='http://www.yosida.com/images/kanji/602A.gif'></html>");
+	public static JLabel kanjiText = new JLabel("");
+	public static JLabel kanjiGif = new JLabel("");
 	
 	public KanjiPanel() {
 		setBackground(Color.white);
@@ -33,10 +33,10 @@ public class KanjiPanel extends JPanel {
 		Font kanji1 = new Font("Noto Sans CJK JP", Font.PLAIN, 115);
 		kanjiText.setFont(kanji1);
 		kanjiText.setForeground(Color.black);
-		kanjiText.setText("<html>怪"
+		/*kanjiText.setText("<html>怪"
 				+ "<span style='font-family:\"Noto Serif CJK SC\" '>怪</span>"
 				//+ "<img src='http://www.yosida.com/images/kanji/8336.gif'></html>");
-				+ "</html>");
+				+ "</html>");*/
 		
 		gc.gridy++;
 		gc.weightx = 2;

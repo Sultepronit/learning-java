@@ -31,10 +31,24 @@ public class Word {
 		example = ex;
 	}
 	
+	public String replaceBrackets(String word) {
+		if(word.charAt(0) == '<') {
+			word = "#" + word.substring(1);
+			word = word.replaceAll("\\(", "<span style='color:yellow'>");
+			//word = word.replaceAll("(", "<span>");
+			//word.replaceAll("\\(", "-");
+			word = word.replaceAll("\\[", "<span style='color:blue'>");
+			word = word.replaceAll("\\{", "<span style='color:green'>");
+			word = word.replaceAll("[\\)\\}\\]]", "</span>");
+		}
+		return word;
+	}
+	
 	public String getWritings() {
 		StringBuilder result = new StringBuilder();
 		for(int i = 0; i < mainWritings.length; i++) {
-			result.append(mainWritings[i]);
+			//result.append(mainWritings[i]);
+			result.append(replaceBrackets(mainWritings[i]));
 			if(i + 1 == mainWritings.length) break;
 			result.append("　");
 		}
@@ -54,7 +68,14 @@ public class Word {
 		return result.toString();
 	}
 	
-	//public char[] getAllKanji() {
+	public String deleteBrackets(String word) {
+		if(word.charAt(0) == '<') {
+			//word = word.replaceAll("[()[]{}<]", "");
+			word = word.replaceAll("[(){}<\\[\\]]", "");
+		}
+		return word;
+	}
+	
 	public LinkedHashSet<Character> getAllKanji() {
 		var builder = new StringBuilder();
 		for(int i = 0; i < mainWritings.length; i++) {
@@ -63,24 +84,12 @@ public class Word {
 		for(int i = 0; i < additionalWritings.length; i++) {
 			builder.append(additionalWritings[i]);
 		}
-		//builder.replace(id, example, translation)
-		//builder.toString().replace("[あ-ん]", "");
-		//return builder.toString().replace("[あ-゜]", "").toCharArray();
-		//return builder.toString().replace("る", "").toCharArray();
 		var string =  builder.toString();
-		//builder.delete(id, example);
 		var set = new LinkedHashSet<Character>();
-		var builder2 = new StringBuilder();
 		for(char c: string.toCharArray()) {
-			//if(c > 'ん') builder2.append(c);
-			//if(c > '゜') set.add(c);
-			//if(c > 'ヶ') set.add(c);
 			if(c > 'ー') set.add(c);
-			
 		}
-		var array = builder2.toString().toCharArray();
 		return set;
-		
 	}
 	
 	public String getTranscriptions() {
@@ -116,7 +125,8 @@ public class Word {
 		String[] list = new String[length];
 		for(int i = 0, j = 0; i < mainTranscriptions.length; i++) {
 			list[j++] = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-					+ mainTranscriptions[i] + "&kanji=" + mainWritings[0];
+					+ mainTranscriptions[i] + "&kanji=" + deleteBrackets(mainWritings[0]);
+			System.out.println(deleteBrackets(mainWritings[0]));
 		}
 		PlayMP3.play(list);
 	}
