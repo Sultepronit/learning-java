@@ -1,13 +1,12 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.Random;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,10 +23,8 @@ public class WordPanel extends JPanel {
 	public static JLabel translationLabel = new JLabel("");
 	
 	public WordPanel() {
-		//setBackground(Color.white);
+		setBackground(Color.white);
 		//setBorder(BorderFactory.createEtchedBorder());
-		
-		var getKey = new GetKey();
 		
 		setLayout(new GridBagLayout());
 		var gc = new GridBagConstraints();
@@ -35,19 +32,17 @@ public class WordPanel extends JPanel {
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.gridwidth = 1;
-
-		
-		//gc.gridx++;
 		gc.weightx = 2;
-		//gc.gridwidth = 3;
-		gc.anchor = GridBagConstraints.CENTER;
+		gc.insets = new Insets(0,30,0,0);
+		//gc.anchor = GridBagConstraints.CENTER;
+		gc.fill = GridBagConstraints.HORIZONTAL;
 		
-		gc.gridy++;
+		//gc.gridy++;
 		//gc.weighty = 1;
 		add(wordLabel, gc);
 		Font word1 = new Font("Arial", Font.PLAIN, 100);
 		wordLabel.setFont(word1);
-		wordLabel.setBackground(Color.YELLOW);
+		//wordLabel.setBackground(Color.YELLOW);
 		wordLabel.setForeground(Color.black);
 		
 		gc.gridy++;
@@ -59,83 +54,21 @@ public class WordPanel extends JPanel {
 		transcriptionLabel.setForeground(Color.black);
 		
 		gc.gridy++;
-		gc.fill = GridBagConstraints.HORIZONTAL;
+		//gc.fill = GridBagConstraints.HORIZONTAL;
 		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
 		add(translationLabel, gc);
 		translationLabel.setForeground(Color.black);
 		
-		/*gc.gridy++;
-		//gc.fill = GridBagConstraints.HORIZONTAL;
-		gc.fill = GridBagConstraints.CENTER;
-		var transPanel = new JPanel();
-		transPanel.setBackground(Color.white);
-		transPanel.setBorder(BorderFactory.createEtchedBorder());
-		transPanel.setLayout(new GridBagLayout());
-		add(transPanel, gc);
-		transPanel.getSize();
-		//System.out.println(mainFrame.getContentPane().getSize());
-		
-		var nc = new GridBagConstraints();
-		nc.gridx = 0;
-		nc.gridy = 0;
-		//nc.fill = GridBagConstraints.HORIZONTAL;
-		//nc.fill = GridBagConstraints.BASELINE;
-		//nc.fill = GridBagConstraints.CENTER;
-		transPanel.add(translationLabel, gc);
-		translationLabel.setBorder(BorderFactory.createEtchedBorder());
-		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
-		translationLabel.setForeground(Color.black);*/
-		
-		//translationLabel.setPreferredSize(new Dimension(250, 100));
-		//translationLabel.setSize(transPanel.getSize());
-		/*translationLabel.isMaximumSizeSet();
-		System.out.println(translationLabel.isMaximumSizeSet());
-		translationLabel.setMaximumSize(getMaximumSize());
-		System.out.println(translationLabel.isMaximumSizeSet());
-		translationLabel.setSize(2000, 100);*/
-		
-		//add(new JLabel("#####"), gc);
-		/*gc.gridx++;
-		add(new JLabel("#####"), gc);*/
-		
-		/*gc.gridy++;
-		//var transl = new JTextPane();
-		//var transl = new JText
-		add(transl, gc);
-		transl.setText("dasdas");*/
-		
-		
-		/*gc.gridy++;
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-		add(new JLabel("kanj0"), gc);
-		
-		gc.anchor = GridBagConstraints.FIRST_LINE_END;
-		add(new JLabel("kanj01"), gc);
-		
-		gc.gridy++;
-		//gc.gridx++;
-		//gc.gridwidth = 2;
-		gc.weighty = 2;
-		//gc.weightx = 2;
-		add(new JLabel("#####"), gc);*/
-		
 	}
-	
-	public static String[][] words = {
-			{"怪しい", "あやしい", "сумнівний, підозрілий"},
-			{"趣味", "しゅみ", "інтерес, хобі, захоплення"},	
-			{"燃える", "もえる", "горіти, палати <i>прям. і перен.</i>"},	
-	};
 	
 	public static void changeContents0() {
 		//System.out.println(WordArray0.words0[12][0][0]);
 		Random random = new Random();
-		int i = random.nextInt(3);
 		int x = random.nextInt(WordArray0.words0.length);
 		System.out.println(ReadFile.words1.get(x).getWritings());
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
-		char c = words[i][0].charAt(0);
+		char c = ReadFile.words1.get(x).getWritings().charAt(0);
 		//System.out.println(c);
 		//System.out.println(Integer.toHexString((int) c));
 		String sc = Integer.toHexString((int) c).toUpperCase();

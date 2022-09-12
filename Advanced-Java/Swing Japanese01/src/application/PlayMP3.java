@@ -21,6 +21,7 @@ public class PlayMP3 {
             	var url = new URL(urlString[i]);
             	mp3Player.addToPlayList(url);
             }
+            //mp3Player.setRepeat(true);
             //mp3Player.addToPlayList(url);
             
             mp3Player.play();
