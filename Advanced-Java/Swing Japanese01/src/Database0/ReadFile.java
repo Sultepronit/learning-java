@@ -39,19 +39,22 @@ public class ReadFile {
 				/*String line = scanner.nextLine();
 				System.out.println(line);*/
 				boolean isUser = scanner.nextBoolean();
+				//System.out.println(isUser);
 				scanner.nextLine();
 				String mainWritings = scanner.nextLine();
+				//System.out.println(mainWritings);
 				String additionalWritings = scanner.nextLine();
 				String mainTranscriptions = scanner.nextLine();
 				String additionalTranscriptions = scanner.nextLine();
 				String translation = scanner.nextLine();
+				//System.out.println(translation);
 				int example = scanner.nextInt();
 				scanner.nextLine();
 				Word word = new Word(mainWritings, isUser, additionalWritings, mainTranscriptions, additionalTranscriptions, translation, example);
 				//System.out.println(word);
 				words1.add(word);
 			}
-			System.out.println(words1.get(333));
+			//System.out.println(words1.get(333));
 			
 			scanner.close();
 		} catch (FileNotFoundException e) {
