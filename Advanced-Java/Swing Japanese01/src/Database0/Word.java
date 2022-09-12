@@ -1,5 +1,6 @@
 package Database0;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Word {
@@ -23,4 +24,14 @@ public class Word {
 		additionalTranscriptions = at.split(", ");
 		translation = tr;
 	}
+
+	@Override
+	public String toString() {
+		return "{" + id + "\n" + Arrays.toString(mainWritings) + "\n" + isUsed
+				+ "\n" + Arrays.toString(additionalWritings) + "\n"
+				+ Arrays.toString(mainTranscriptions) + "\n"
+				+ Arrays.toString(additionalTranscriptions) + "\n" + translation + "\n" + example
+				+ "}";
+	}
+	
 }
