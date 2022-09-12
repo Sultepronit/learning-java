@@ -20,12 +20,22 @@ public class Word {
 	private String translation;
 	private int example;
 	
+	public boolean testThis = false; 
+	
 	public Word(String mw, boolean iu, String aw, String mt, String at, String tr, int ex) {
 		mainWritings = mw.split(", ");
 		isUsed = iu;
 		additionalWritings = aw.split(", ");
 		if(additionalWritings[0] == "") additionalWritings = new String[0];
 		mainTranscriptions = mt.split(", ");
+		for(int i = 0; i < mainTranscriptions.length; i++) {
+			if(mainTranscriptions[i].charAt(0) == 'm') {
+				mainTranscriptions[i] = mainTranscriptions[i].substring(1);
+				isMuted.add(i);
+				testThis = true;
+			}
+			else testThis = false;
+		}
 		additionalTranscriptions = at.split(", ");
 		if(additionalTranscriptions[0] == "") additionalTranscriptions = new String[0];
 		translation = tr;
@@ -129,6 +139,7 @@ public class Word {
 		int length = mainTranscriptions.length - isMuted.size();
 		String[] list = new String[length];
 		for(int i = 0, j = 0; i < mainTranscriptions.length; i++) {
+			if(isMuted.contains(i)) continue;
 			list[j++] = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
 					+ mainTranscriptions[i] + "&kanji=" + deleteBrackets(mainWritings[0]);
 			//System.out.println(deleteBrackets(mainWritings[0]));
