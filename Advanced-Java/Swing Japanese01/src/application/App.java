@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import Database0.ReadFile;
 import gui.MainFrame;
 import gui.WordKanjiPanel;
+import gui.WordPanel;
 
 class Controller {
 	private static MainFrame mainFrame;
@@ -28,6 +29,7 @@ public class App {
 		//SwingUtilities.invokeLater(controller);
 		SwingUtilities.invokeLater(Controller::new);
 		//System.out.println(Controller.mainFrame.getContentPane().getSize());
+		WordPanel.forward();
 
 	}
 

@@ -1,9 +1,6 @@
 package Database0;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Random;
+import java.util.*;
 
 import application.PlayMP3;
 
@@ -14,13 +11,12 @@ public class Word {
 	private boolean isUsed;
 	private String[] additionalWritings;
 	private String[] mainTranscriptions;
-	//private int[] isMuted;
 	private HashSet<Integer> isMuted = new HashSet<>();
 	private String[] additionalTranscriptions;
 	private String translation;
 	private int example;
 	
-	public boolean testThis = false; 
+	//public boolean testThis = false; 
 	
 	public Word(String mw, boolean iu, String aw, String mt, String at, String tr, int ex) {
 		mainWritings = mw.split(", ");
@@ -32,9 +28,9 @@ public class Word {
 			if(mainTranscriptions[i].charAt(0) == 'm') {
 				mainTranscriptions[i] = mainTranscriptions[i].substring(1);
 				isMuted.add(i);
-				testThis = true;
+				//testThis = true;
 			}
-			else testThis = false;
+			//else testThis = false;
 		}
 		additionalTranscriptions = at.split(", ");
 		if(additionalTranscriptions[0] == "") additionalTranscriptions = new String[0];
@@ -89,6 +85,12 @@ public class Word {
 			else word = word.replaceAll("\\{.*?\\}", "");
 		}
 		return word;
+	}
+	
+	public String getOneWriting() {
+		Random random = new Random();
+		int r = random.nextInt(mainWritings.length);
+		return deleteBrackets(mainWritings[r]);
 	}
 	
 	public LinkedHashSet<Character> getAllKanji() {

@@ -79,6 +79,55 @@ public class WordPanel extends JPanel {
 		exampleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 	}
 	
+	private static int word = 0;
+	private static String status = null;
+	public static void forward() {
+		status = "start";
+		Random random = new Random();
+		word = random.nextInt(WordArray0.words0.length);
+		
+		kanjiLabel.setText("");
+		gifLabel.setText("");
+		
+		transcriptionLabel.setText("");
+		translationLabel.setText("");
+		exampleLabel.setText("");
+		
+		wordLabel.setText("<html><p style='font-family:\"Noto Serif CJK JP\";'>"
+			+ ReadFile.words1.get(word).getOneWriting() + "</p></html>");
+	}
+	
+	public static void hintForward() {
+		if(status == "start") {
+			status = "hint";
+			transcriptionLabel.setText(ReadFile.words1.get(word).getTranscriptions());
+		}
+		ReadFile.words1.get(word).say();
+	}
+	
+	public static void showForward() {
+		if(status != "finish") {
+			if(status != "hint") {
+				transcriptionLabel.setText(ReadFile.words1.get(word).getTranscriptions());
+			}
+			status = "finish";
+			var kanjis = ReadFile.words1.get(word).getAllKanji();
+			kanjiLabel.setText(kanjis.toString());
+			String gifs = kanjiToGif(kanjis);
+			gifLabel.setText("<html>" + gifs + "</html>");
+			wordLabel.setText("<html><p style='font-family:\"Noto Serif CJK JP\";'>"
+					+ ReadFile.words1.get(word).getWritings() + "</p></html>");
+			
+			translationLabel.setText("<html><p style='font-family:\"FreeSerif\" '>"
+				+ ReadFile.words1.get(word).getTranslation() + "</p></html>");
+			var example = ReadFile.words1.get(word).getExample();
+			if(example != null) {
+				exampleLabel.setText(example);
+			}
+		}
+		ReadFile.words1.get(word).say();
+	}
+	
 	public static void changeContents0() {
 		//System.out.println(WordArray0.words0[12][0][0]);
 		Random random = new Random();
@@ -106,7 +155,7 @@ public class WordPanel extends JPanel {
 		char c = ReadFile.words1.get(x).getWritings().charAt(0);
 		//System.out.println(c);
 		//System.out.println(Integer.toHexString((int) c));
-		String sc = Integer.toHexString((int) c).toUpperCase();
+		//String sc = Integer.toHexString((int) c).toUpperCase();
 		//System.out.println("http://www.yosida.com/images/kanji/" + sc + ".gif");
 		wordLabel.setText("<html>"
 				//+ "<img src='http://www.yosida.com/images/kanji/" + sc + ".gif'>"

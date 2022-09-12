@@ -19,6 +19,12 @@ class GetKey implements KeyListener {
 		System.out.print(k);
 		
 		switch(k) {
+			case 's':
+				WordPanel.hintForward();
+				break; 
+			case 'w':
+				WordPanel.showForward();
+				break;
 			case 'a':
 				PlayMP3.repeat();
 				break;
@@ -27,7 +33,8 @@ class GetKey implements KeyListener {
 				break;
 			
 			default: 
-				WordPanel.changeContents0();
+				//WordPanel.changeContents0();
+				WordPanel.forward();
 		}
 		
 		//WordPanel.changeContents0();
