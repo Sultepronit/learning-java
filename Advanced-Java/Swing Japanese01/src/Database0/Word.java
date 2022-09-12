@@ -72,8 +72,15 @@ public class Word {
 	}
 	
 	public void say() {
-		PlayMP3.play("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
-				+ mainTranscriptions[0] + "&kanji=" + mainWritings[0]);
+		int length = mainTranscriptions.length - isMuted.size();
+		String[] list = new String[length];
+		for(int i = 0, j = 0; i < mainTranscriptions.length; i++) {
+			list[j++] = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
+					+ mainTranscriptions[i] + "&kanji=" + mainWritings[0];
+		}
+		PlayMP3.play(list);
+		/*PlayMP3.play("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
+				+ mainTranscriptions[0] + "&kanji=" + mainWritings[0]);*/
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -16,9 +15,22 @@ import application.PlayMP3;
 
 class GetKey implements KeyListener {
 	public void keyTyped(KeyEvent e) {
-		System.out.print(e.getKeyChar());
-		//WordKanjiPanel.changeContents0();
-		WordPanel.changeContents0();
+		char k = e.getKeyChar();
+		System.out.print(k);
+		
+		switch(k) {
+			case 'a':
+				PlayMP3.repeat();
+				break;
+			case 'm':
+				PlayMP3.stop();
+				break;
+			
+			default: 
+				WordPanel.changeContents0();
+		}
+		
+		//WordPanel.changeContents0();
 	}
 	public void keyPressed(KeyEvent e) {}
 	public void keyReleased(KeyEvent e) {}
