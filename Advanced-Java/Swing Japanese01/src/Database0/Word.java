@@ -102,6 +102,10 @@ public class Word {
 		return result.toString();
 	}
 	
+	public String getTranslation() {
+		return translation;
+	}
+	
 	public void say() {
 		int length = mainTranscriptions.length - isMuted.size();
 		String[] list = new String[length];

@@ -48,7 +48,7 @@ public class ReadFile {
 				int example = scanner.nextInt();
 				scanner.nextLine();
 				Word word = new Word(mainWritings, isUser, additionalWritings, mainTranscriptions, additionalTranscriptions, translation, example);
-				System.out.println(word);
+				//System.out.println(word);
 				words1.add(word);
 			}
 			System.out.println(words1.get(333));

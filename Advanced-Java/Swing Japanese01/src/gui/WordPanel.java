@@ -113,7 +113,7 @@ public class WordPanel extends JPanel {
 		//translationLabel.setText("<html><p style='font-family:\"FreeSerif\"; text-align:center; background-color:yellow '>"
 		translationLabel.setText("<html><p style='font-family:\"FreeSerif\" '>"
 		//translationLabel.setText("<html>"
-		+ WordArray0.words0[x][2][0] + "</p><p>-</p></html>");
+		+ ReadFile.words1.get(x).getTranslation() + "</p></html>");
 		//+ WordArray0.words0[x][2][0] + "</p><p style='width:1500'>wwwwwwwwwwwsdfudwwwwwwwwwwwwwwwwd</p></html>");
 		//+ WordArray0.words0[x][2][0] + "</p><p style='color:white'>kasd fasdfa sdfasdfaswwwwwwwwwwwdfasdfasdfasdfudwwwwww wwwwwww wwwd</p></html>");
 		//translationLabel.setText(WordArray0.words0[x][2][0]);
