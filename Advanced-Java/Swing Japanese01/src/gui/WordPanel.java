@@ -152,7 +152,7 @@ public class WordPanel extends JPanel {
 		
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
-		char c = ReadFile.words1.get(x).getWritings().charAt(0);
+		//char c = ReadFile.words1.get(x).getWritings().charAt(0);
 		//System.out.println(c);
 		//System.out.println(Integer.toHexString((int) c));
 		//String sc = Integer.toHexString((int) c).toUpperCase();

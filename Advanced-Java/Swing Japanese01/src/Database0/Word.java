@@ -1,6 +1,9 @@
 package Database0;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Random;
 
 import application.PlayMP3;
 
@@ -149,13 +152,13 @@ public class Word {
 		PlayMP3.play(list);
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "{" + id + "\n" + Arrays.toString(mainWritings) + "\n" + isUsed
 				+ "\n" + Arrays.toString(additionalWritings) + "\n"
 				+ Arrays.toString(mainTranscriptions) + "\n"
 				+ Arrays.toString(additionalTranscriptions) + "\n" + translation + "\n" + example
 				+ "}";
-	}
+	}*/
 	
 }
