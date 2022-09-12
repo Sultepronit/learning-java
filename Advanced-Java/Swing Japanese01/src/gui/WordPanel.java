@@ -5,9 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +20,7 @@ public class WordPanel extends JPanel {
 	
 	//public static JLabel wordLabel = new JLabel("word");
 	public static JLabel kanjiLabel = new JLabel("");
+	public static JLabel gifLabel = new JLabel("");
 	public static JLabel wordLabel = new JLabel("");
 	public static JLabel transcriptionLabel = new JLabel("");
 	public static JLabel translationLabel = new JLabel("");
@@ -36,7 +36,7 @@ public class WordPanel extends JPanel {
 		gc.gridy = 0;
 		gc.gridwidth = 1;
 		gc.weightx = 2;
-		gc.insets = new Insets(0,30,0,0);
+		gc.insets = new Insets(10,30,0,0);
 		//gc.anchor = GridBagConstraints.CENTER;
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		
@@ -44,6 +44,11 @@ public class WordPanel extends JPanel {
 		kanjiLabel.setForeground(Color.black);
 		kanjiLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		
+		gc.insets = new Insets(0,0,0,0);
+		gc.gridy++;
+		add(gifLabel, gc);
+		gc.insets = new Insets(0,30,0,0);
+
 		gc.gridy++;
 		//gc.weighty = 1;
 		add(wordLabel, gc);
@@ -52,6 +57,7 @@ public class WordPanel extends JPanel {
 		//wordLabel.setBackground(Color.YELLOW);
 		wordLabel.setForeground(Color.black);
 		
+		gc.insets = new Insets(0,40,0,0);
 		gc.gridy++;
 		//gc.weighty = 1;
 		transcriptionLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 40));
@@ -79,7 +85,10 @@ public class WordPanel extends JPanel {
 		/*var builder = new StringBuilder();
 		builder.append(kanjis);*/
 		kanjiLabel.setText(kanjis.toString());
-
+		String gifs = kanjiToGif(kanjis);
+		System.out.println(gifs);
+		gifLabel.setText("<html>" + gifs + "</html>");
+		
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
 		char c = ReadFile.words1.get(x).getWritings().charAt(0);
@@ -88,8 +97,8 @@ public class WordPanel extends JPanel {
 		String sc = Integer.toHexString((int) c).toUpperCase();
 		//System.out.println("http://www.yosida.com/images/kanji/" + sc + ".gif");
 		wordLabel.setText("<html>"
-				+ "<img src='http://www.yosida.com/images/kanji/" + sc + ".gif'>"
-				+ "<img src='http://www.yosida.com/images/kanji/8336.gif'>"
+				//+ "<img src='http://www.yosida.com/images/kanji/" + sc + ".gif'>"
+				//+ "<img src='http://www.yosida.com/images/kanji/8336.gif'>"
 				//+ "<p style='font-family:\"Noto Serif CJK JP\"; text-align:center'>"
 				+ "<p style='font-family:\"Noto Serif CJK JP\";'>"
 				//+ "<p style='font-family:\"Noto Serif CJK JP\"; font-size:7em; text-align:center'>"
@@ -111,9 +120,13 @@ public class WordPanel extends JPanel {
 		ReadFile.words1.get(x).say();
 	}
 	
-	private static String kanjiToGif() {
-		
-		return null;
+	private static String kanjiToGif(Set<Character> set) {
+		var result = new StringBuilder();
+		for(var c: set) {
+			String code = Integer.toHexString((int) c).toUpperCase();
+			result.append("<img src='http://www.yosida.com/images/kanji/" + code + ".gif'>");
+		}
+		return result.toString();
 	}
 
 }

@@ -73,7 +73,8 @@ public class Word {
 		for(char c: string.toCharArray()) {
 			//if(c > 'ん') builder2.append(c);
 			//if(c > '゜') set.add(c);
-			if(c > 'ヶ') set.add(c);
+			//if(c > 'ヶ') set.add(c);
+			if(c > 'ー') set.add(c);
 			
 		}
 		var array = builder2.toString().toCharArray();
