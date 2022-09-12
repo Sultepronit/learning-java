@@ -10,7 +10,8 @@ public class PlayMP3 {
 	public static MP3Player mp3Player;
 	
     //public static void main(String[] args) {
-	public static void audio(String urlString) {
+	//public static void audio(String urlString) {
+	public static void play(String urlString) {
 
         try {
 

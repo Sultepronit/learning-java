@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Database0.ReadFile;
 import Database0.WordArray0;
 
 public class WordPanel extends JPanel {
@@ -131,26 +132,30 @@ public class WordPanel extends JPanel {
 		Random random = new Random();
 		int i = random.nextInt(3);
 		int x = random.nextInt(WordArray0.words0.length);
+		System.out.println(ReadFile.words1.get(x).getWritings());
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
 		//wordLabel.setText("<html><p style='font-size:4em'>" + word + "</html>");
 		char c = words[i][0].charAt(0);
-		System.out.println(c);
-		System.out.println(Integer.toHexString((int) c));
+		//System.out.println(c);
+		//System.out.println(Integer.toHexString((int) c));
 		String sc = Integer.toHexString((int) c).toUpperCase();
-		System.out.println("http://www.yosida.com/images/kanji/" + sc + ".gif");
+		//System.out.println("http://www.yosida.com/images/kanji/" + sc + ".gif");
 		wordLabel.setText("<html>"
 				+ "<img src='http://www.yosida.com/images/kanji/" + sc + ".gif'>"
 				+ "<img src='http://www.yosida.com/images/kanji/8336.gif'>"
-				+ "<p style='font-family:\"Noto Serif CJK JP\"; text-align:center'>"
+				//+ "<p style='font-family:\"Noto Serif CJK JP\"; text-align:center'>"
+				+ "<p style='font-family:\"Noto Serif CJK JP\";'>"
 				//+ "<p style='font-family:\"Noto Serif CJK JP\"; font-size:7em; text-align:center'>"
 				//+ "<p style='font-family:\"VL PGothic\"; font-size:7em; text-align:center'>"
 				//+words[i][0] + "</p></html>");
-				+WordArray0.words0[x][0][0] + "</p></html>");
+				//+WordArray0.words0[x][0][0] + "</p></html>");
+				+ ReadFile.words1.get(x).getWritings() + "</p></html>");
 				
 		//wordLabel.setBackground(Color.YELLOW);
 		//wordLabel.setForeground(Color.RED);VL PGothic
-		transcriptionLabel.setText(WordArray0.words0[x][1][0]);
-		translationLabel.setText("<html><p style='font-family:\"FreeSerif\"; text-align:center; background-color:yellow '>"
+		transcriptionLabel.setText(ReadFile.words1.get(x).getTranscriptions());
+		//translationLabel.setText("<html><p style='font-family:\"FreeSerif\"; text-align:center; background-color:yellow '>"
+		translationLabel.setText("<html><p style='font-family:\"FreeSerif\" '>"
 		//translationLabel.setText("<html>"
 		+ WordArray0.words0[x][2][0] + "</p><p>-</p></html>");
 		//+ WordArray0.words0[x][2][0] + "</p><p style='width:1500'>wwwwwwwwwwwsdfudwwwwwwwwwwwwwwwwd</p></html>");
@@ -159,6 +164,7 @@ public class WordPanel extends JPanel {
 		//PlayMP3.play();
 		/*PlayMP3.audio("https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
 				+ words[i][1] + "&kanji=" + words[i][0]);*/
+		ReadFile.words1.get(x).say();
 	}
 
 }

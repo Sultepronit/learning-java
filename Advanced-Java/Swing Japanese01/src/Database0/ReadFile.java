@@ -10,7 +10,12 @@ public class ReadFile {
 	//public static Word words1 = new
 	public static ArrayList<Word> words1 = new ArrayList<>();
 	
-	public static void main (String[] args) {
+	public ReadFile() {
+		read();
+	}
+	
+	//public static void main (String[] args) {
+	private static void read() {
 		System.out.println("Helllllo!");
 		try {
 			Scanner scanner = new Scanner(db);
