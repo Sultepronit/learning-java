@@ -3,6 +3,7 @@ package Database0;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Random;
 
 import application.PlayMP3;
 
@@ -33,10 +34,9 @@ public class Word {
 	
 	public String replaceBrackets(String word) {
 		if(word.charAt(0) == '<') {
-			word = "#" + word.substring(1);
+			//word = "#" + word.substring(1);
+			word = word.substring(1);
 			word = word.replaceAll("\\(", "<span style='color:yellow'>");
-			//word = word.replaceAll("(", "<span>");
-			//word.replaceAll("\\(", "-");
 			word = word.replaceAll("\\[", "<span style='color:blue'>");
 			word = word.replaceAll("\\{", "<span style='color:green'>");
 			word = word.replaceAll("[\\)\\}\\]]", "</span>");
@@ -70,8 +70,13 @@ public class Word {
 	
 	public String deleteBrackets(String word) {
 		if(word.charAt(0) == '<') {
-			//word = word.replaceAll("[()[]{}<]", "");
-			word = word.replaceAll("[(){}<\\[\\]]", "");
+			//word = word.replaceAll("[{}<\\[\\]]", "");
+			word = word.replaceAll("[<\\[\\]]", "");
+			word = word.replaceAll("\\(.*?\\)", "");
+			Random random = new Random();
+			int b = random.nextInt(2);
+			if(b == 1) word = word.replaceAll("[{}]", "");
+			else word = word.replaceAll("\\{.*?\\}", "");
 		}
 		return word;
 	}
@@ -126,7 +131,7 @@ public class Word {
 		for(int i = 0, j = 0; i < mainTranscriptions.length; i++) {
 			list[j++] = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana="
 					+ mainTranscriptions[i] + "&kanji=" + deleteBrackets(mainWritings[0]);
-			System.out.println(deleteBrackets(mainWritings[0]));
+			//System.out.println(deleteBrackets(mainWritings[0]));
 		}
 		PlayMP3.play(list);
 	}

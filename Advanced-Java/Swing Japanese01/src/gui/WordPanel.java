@@ -84,13 +84,13 @@ public class WordPanel extends JPanel {
 		Random random = new Random();
 		int x = random.nextInt(WordArray0.words0.length);
 		System.out.println(ReadFile.words1.get(x).getWritings());
-		if(ReadFile.words1.get(x).getWritings().charAt(0) != '#') {
+		/*if(ReadFile.words1.get(x).getWritings().charAt(0) != '#') {
 			for(int i = 0; i < 100; i++) {
 				x = random.nextInt(WordArray0.words0.length);
 				System.out.println(ReadFile.words1.get(x).getWritings());
 				if(ReadFile.words1.get(x).getWritings().charAt(0) == '#') break;
 			}
-		}
+		}*/
 		
 		//char[] kanjis = ReadFile.words1.get(x).getAllKanji();
 		var kanjis = ReadFile.words1.get(x).getAllKanji();
