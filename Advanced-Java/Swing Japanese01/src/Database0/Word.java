@@ -19,7 +19,7 @@ public class Word {
 	private String translation;
 	private int example;
 	
-	public Word(String mw, boolean iu, String aw, String mt, String at, String tr) {
+	public Word(String mw, boolean iu, String aw, String mt, String at, String tr, int ex) {
 		mainWritings = mw.split(", ");
 		isUsed = iu;
 		additionalWritings = aw.split(", ");
@@ -28,6 +28,7 @@ public class Word {
 		additionalTranscriptions = at.split(", ");
 		if(additionalTranscriptions[0] == "") additionalTranscriptions = new String[0];
 		translation = tr;
+		example = ex;
 	}
 	
 	public String getWritings() {

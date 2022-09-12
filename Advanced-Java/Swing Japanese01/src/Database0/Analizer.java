@@ -162,6 +162,9 @@ public class Analizer {
 			Writer.write("\n");
 			Writer.write(WordArray0.words0[i][2][0]);
 			Writer.write("\n");
+			Writer.write(WordArray0.words0[i][3][0]);
+			Writer.write("\n");
+			if(WordArray0.words0[i][3][0] != "0") System.out.println("!!!");
 			
 			System.out.println();
 			

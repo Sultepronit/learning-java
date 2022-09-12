@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFile {
-	private static File db = new File("Test.txt");
+	private static File db = new File("db.txt");
 	//public static Word words1 = new
 	public static ArrayList<Word> words1 = new ArrayList<>();
 	
@@ -45,8 +45,10 @@ public class ReadFile {
 				String mainTranscriptions = scanner.nextLine();
 				String additionalTranscriptions = scanner.nextLine();
 				String translation = scanner.nextLine();
-				Word word = new Word(mainWritings, isUser, additionalWritings, mainTranscriptions, additionalTranscriptions, translation);
-				//System.out.println(word);
+				int example = scanner.nextInt();
+				scanner.nextLine();
+				Word word = new Word(mainWritings, isUser, additionalWritings, mainTranscriptions, additionalTranscriptions, translation, example);
+				System.out.println(word);
 				words1.add(word);
 			}
 			System.out.println(words1.get(333));
