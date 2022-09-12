@@ -106,6 +106,11 @@ public class Word {
 		return translation;
 	}
 	
+	public String getExample() {
+		if(example > 0) return Examples.list[example];
+		return null;
+	}
+	
 	public void say() {
 		int length = mainTranscriptions.length - isMuted.size();
 		String[] list = new String[length];

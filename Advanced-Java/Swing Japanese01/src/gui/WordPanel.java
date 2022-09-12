@@ -24,6 +24,7 @@ public class WordPanel extends JPanel {
 	public static JLabel wordLabel = new JLabel("");
 	public static JLabel transcriptionLabel = new JLabel("");
 	public static JLabel translationLabel = new JLabel("");
+	public static JLabel exampleLabel = new JLabel("");
 	
 	public WordPanel() {
 		setBackground(Color.white);
@@ -68,10 +69,14 @@ public class WordPanel extends JPanel {
 		
 		gc.gridy++;
 		//gc.fill = GridBagConstraints.HORIZONTAL;
-		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
 		add(translationLabel, gc);
+		translationLabel.setFont(new Font("Noto Serif CJK SC", Font.PLAIN, 50));
 		translationLabel.setForeground(Color.black);
 		
+		gc.gridy++;
+		add(exampleLabel, gc);
+		exampleLabel.setForeground(Color.black);
+		exampleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 	}
 	
 	public static void changeContents0() {
@@ -86,7 +91,7 @@ public class WordPanel extends JPanel {
 		builder.append(kanjis);*/
 		kanjiLabel.setText(kanjis.toString());
 		String gifs = kanjiToGif(kanjis);
-		System.out.println(gifs);
+		//System.out.println(gifs);
 		gifLabel.setText("<html>" + gifs + "</html>");
 		
 		//"<img src=\"http://www.yosida.com/images/kanji/984C.gif\">"
@@ -117,6 +122,10 @@ public class WordPanel extends JPanel {
 		//+ WordArray0.words0[x][2][0] + "</p><p style='width:1500'>wwwwwwwwwwwsdfudwwwwwwwwwwwwwwwwd</p></html>");
 		//+ WordArray0.words0[x][2][0] + "</p><p style='color:white'>kasd fasdfa sdfasdfaswwwwwwwwwwwdfasdfasdfasdfudwwwwww wwwwwww wwwd</p></html>");
 		//translationLabel.setText(WordArray0.words0[x][2][0]);
+		var example = ReadFile.words1.get(x).getExample();
+		if(example != null) {
+			exampleLabel.setText(example);
+		}
 		ReadFile.words1.get(x).say();
 	}
 	
