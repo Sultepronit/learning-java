@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private UserFormListener formListener;
 	
 	public MainPanel() {
 		//setBackground(Color.YELLOW);
@@ -87,6 +88,10 @@ public class MainPanel extends JPanel {
 		
 	}
 	
+	public void setFormListener(UserFormListener formListener) {
+		this.formListener = formListener;
+	}
+	
 	private JPanel createFormPanel() {
 		JPanel panel = new JPanel();
 		
@@ -103,9 +108,12 @@ public class MainPanel extends JPanel {
 		
 		var addButton = new JButton("Save");
 		addButton.addActionListener(e -> {
-			String name = nameField.getText();
+			String username = nameField.getText();
 			String password = passField.getText();
-			System.out.println(name + ": " + password);
+			//System.out.println(name + ": " + password);
+			if(formListener != null) {
+				formListener.formSubmitted(username, password);
+			}
 		});
 		
 		panel.setLayout(new GridBagLayout());
