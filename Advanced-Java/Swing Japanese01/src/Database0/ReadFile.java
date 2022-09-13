@@ -16,7 +16,7 @@ public class ReadFile {
 	
 	//public static void main (String[] args) {
 	private static void read() {
-		System.out.println("Helllllo!");
+		//System.out.println("Helllllo!");
 		try {
 			Scanner scanner = new Scanner(db);
 			

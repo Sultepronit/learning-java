@@ -3,6 +3,7 @@ package application;
 import javax.swing.SwingUtilities;
 
 import Database0.ReadFile;
+import Database0.ReadKanjiDB;
 import gui.MainFrame;
 import gui.WordKanjiPanel;
 import gui.WordPanel;
@@ -25,6 +26,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		new ReadFile();
+		new ReadKanjiDB();
 		//Controller controller = new Controller();
 		//SwingUtilities.invokeLater(controller);
 		SwingUtilities.invokeLater(Controller::new);
