@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReadFile {
-	private static File db = new File("db.txt");
+public class ReadKanjiDB {
+	private static File db = new File("kanjidb");
 	//public static Word words1 = new
 	public static ArrayList<Word> words1 = new ArrayList<>();
 	
-	public ReadFile() {
+	public ReadKanjiDB() {
 		read();
 	}
 	
