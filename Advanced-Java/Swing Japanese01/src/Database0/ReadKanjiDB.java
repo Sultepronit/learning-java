@@ -39,7 +39,7 @@ public class ReadKanjiDB {
 				kanjiIndex.put(symbol, i++);
 			}
 			//System.out.println(kanjis1.get(0));
-			System.out.println(kanjiIndex);
+			//System.out.println(kanjiIndex);
 			
 			scanner.close();
 		} catch (FileNotFoundException e) {

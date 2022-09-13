@@ -109,10 +109,10 @@ public class Word {
 		for(char c: string.toCharArray()) {
 			if(c > 'ー') set.add(c);
 			if(c > 'ー') {
-				System.out.println(c);
-				int index = ReadKanjiDB.kanjiIndex.get(c);
+				//System.out.println(c);
+				/*var index = ReadKanjiDB.kanjiIndex.get(c);
 				System.out.println(index);
-				System.out.println(ReadKanjiDB.kanjis1.get(index).getName());
+				System.out.println(ReadKanjiDB.kanjis1.get(index).getName());*/
 			}
 		}
 		return set;

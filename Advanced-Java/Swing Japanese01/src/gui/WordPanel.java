@@ -5,14 +5,45 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Database0.ReadFile;
+import Database0.ReadKanjiDB;
 import Database0.WordArray0;
+
+class KanjiMouse implements MouseListener {
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("!!!!!" + e);
+		//System.out.println(e.getSource());
+		String info = e.getSource().toString();
+		System.out.println(info);
+		//String[] infoArray = info.split(",");
+		String[] infoArray = info.split("=");
+		for(int i = 0; i < infoArray.length; i++) {
+			System.out.println(i + ": " + infoArray[i]);
+		}
+		
+		System.out.println(infoArray[14]);
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+	
+}
 
 public class WordPanel extends JPanel {
 
@@ -20,6 +51,7 @@ public class WordPanel extends JPanel {
 	
 	//public static JLabel wordLabel = new JLabel("word");
 	public static JLabel kanjiLabel = new JLabel("");
+	public static JLabel[] kanjiLabelA = new JLabel[9];//("");
 	public static JLabel gifLabel = new JLabel("");
 	public static JLabel wordLabel = new JLabel("");
 	public static JLabel transcriptionLabel = new JLabel("");
@@ -41,9 +73,34 @@ public class WordPanel extends JPanel {
 		//gc.anchor = GridBagConstraints.CENTER;
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		
+		JPanel kanjiPanel = new JPanel();
+		kanjiPanel.setBorder(BorderFactory.createEtchedBorder());
+		add(kanjiPanel, gc);
+		for(int i = 0; i < 4; i++) {
+			//JLabel klabel = new JLabel("");
+			kanjiLabelA[i] = new JLabel("");
+			//klabel.setText("" + i);
+			//ReadKanjiDB.kanjis1.get(i).getName();
+			//String ki = ReadKanjiDB.kanjis1.get(i).getName();
+			//kanjiLabelA[i].setText(ki);
+			kanjiLabelA[i].addMouseListener(new KanjiMouse());
+			kanjiPanel.add(kanjiLabelA[i]);
+		}
+		
+		gc.gridy++;
 		add(kanjiLabel, gc);
 		kanjiLabel.setForeground(Color.black);
 		kanjiLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		kanjiLabel.addMouseListener(new KanjiMouse());	
+		
+		/*gc.gridx++;
+		kanjiLabelA[0] = new JLabel("A");
+		add(kanjiLabelA[0], gc);
+		kanjiLabelA[0].setForeground(Color.black);
+		kanjiLabelA[0].setFont(new Font("Arial", Font.PLAIN, 30));
+		kanjiLabelA[0].addMouseListener(new KanjiMouse());	
+		
+		gc.gridwidth = 3;*/
 		
 		gc.insets = new Insets(0,0,0,0);
 		gc.gridy++;
@@ -113,6 +170,25 @@ public class WordPanel extends JPanel {
 			status = "finish";
 			var kanjis = ReadFile.words1.get(word).getAllKanji();
 			kanjiLabel.setText(kanjis.toString());
+			
+			//kanjiLabelA[0].setText(kanjis.get(0));
+			int i = 0;
+			for(var kanji: kanjis) {
+				//var symbol = kanji + ""; 
+				/*if(!ReadKanjiDB.kanjis1.contains(kanji)) {
+					kanjiLabelA[i++].setText(kanji + "? ");
+					continue;
+				}*/
+				var kanjiIndex = ReadKanjiDB.kanjiIndex.get(kanji);
+				System.out.println("kanjiIndex: " + kanjiIndex);
+				if(kanjiIndex == null) {
+					kanjiLabelA[i++].setText(kanji + "? ");
+					continue;
+				}
+				String name = ReadKanjiDB.kanjis1.get(kanjiIndex).getName();
+				kanjiLabelA[i++].setText(kanji + ": " + name + " ");
+			}
+			
 			String gifs = kanjiToGif(kanjis);
 			gifLabel.setText("<html>" + gifs + "</html>");
 			wordLabel.setText("<html><p style='font-family:\"Noto Serif CJK JP\";'>"
