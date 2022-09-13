@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Random;
+import com.mariten.kanatools.KanaConverter;
 
 import application.PlayMP3;
 
@@ -20,6 +21,7 @@ public class Word {
 	private int example;
 	
 	//public boolean testThis = false; 
+	private static Random random = new Random();
 	
 	public Word(String mw, boolean iu, String aw, String mt, String at, String tr, int ex) {
 		mainWritings = mw.split(", ");
@@ -82,9 +84,7 @@ public class Word {
 			//word = word.replaceAll("[{}<\\[\\]]", "");
 			word = word.replaceAll("[<\\[\\]]", "");
 			word = word.replaceAll("\\(.*?\\)", "");
-			Random random = new Random();
-			int b = random.nextInt(2);
-			if(b == 1) word = word.replaceAll("[{}]", "");
+			if(random.nextInt(2) == 1) word = word.replaceAll("[{}]", "");
 			else word = word.replaceAll("\\{.*?\\}", "");
 		}
 		return word;
@@ -128,6 +128,10 @@ public class Word {
 			}
 			result.append(")");
 		}
+		int conv_op_flags = KanaConverter.OP_ZEN_HIRA_TO_ZEN_KATA;
+		if(random.nextInt(2) == 1) {
+			return KanaConverter.convertKana(result.toString(), conv_op_flags);
+		}
 		return result.toString();
 	}
 	
@@ -152,13 +156,13 @@ public class Word {
 		PlayMP3.play(list);
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
 		return "{" + id + "\n" + Arrays.toString(mainWritings) + "\n" + isUsed
 				+ "\n" + Arrays.toString(additionalWritings) + "\n"
 				+ Arrays.toString(mainTranscriptions) + "\n"
 				+ Arrays.toString(additionalTranscriptions) + "\n" + translation + "\n" + example
 				+ "}";
-	}*/
+	}
 	
 }
