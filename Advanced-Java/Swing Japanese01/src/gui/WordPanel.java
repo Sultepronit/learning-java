@@ -21,17 +21,17 @@ import Database0.WordArray0;
 class KanjiMouse implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("!!!!!" + e);
+		//System.out.println("!!!!!" + e);
 		//System.out.println(e.getSource());
 		String info = e.getSource().toString();
-		System.out.println(info);
+		//System.out.println(info);
 		//String[] infoArray = info.split(",");
-		String[] infoArray = info.split("=");
-		for(int i = 0; i < infoArray.length; i++) {
+		String[] infoArray = info.split(">");
+		/*for(int i = 0; i < infoArray.length; i++) {
 			System.out.println(i + ": " + infoArray[i]);
-		}
+		}*/
 		
-		System.out.println(infoArray[14]);
+		System.out.println(infoArray[2]);
 	}
 	
 	@Override
@@ -79,12 +79,10 @@ public class WordPanel extends JPanel {
 		for(int i = 0; i < 4; i++) {
 			//JLabel klabel = new JLabel("");
 			kanjiLabelA[i] = new JLabel("");
-			//klabel.setText("" + i);
-			//ReadKanjiDB.kanjis1.get(i).getName();
-			//String ki = ReadKanjiDB.kanjis1.get(i).getName();
-			//kanjiLabelA[i].setText(ki);
 			kanjiLabelA[i].addMouseListener(new KanjiMouse());
 			kanjiPanel.add(kanjiLabelA[i]);
+			kanjiLabelA[i].setForeground(Color.black);
+			kanjiLabelA[i].setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 30));
 		}
 		
 		gc.gridy++;
@@ -92,15 +90,6 @@ public class WordPanel extends JPanel {
 		kanjiLabel.setForeground(Color.black);
 		kanjiLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		kanjiLabel.addMouseListener(new KanjiMouse());	
-		
-		/*gc.gridx++;
-		kanjiLabelA[0] = new JLabel("A");
-		add(kanjiLabelA[0], gc);
-		kanjiLabelA[0].setForeground(Color.black);
-		kanjiLabelA[0].setFont(new Font("Arial", Font.PLAIN, 30));
-		kanjiLabelA[0].addMouseListener(new KanjiMouse());	
-		
-		gc.gridwidth = 3;*/
 		
 		gc.insets = new Insets(0,0,0,0);
 		gc.gridy++;
@@ -186,7 +175,9 @@ public class WordPanel extends JPanel {
 					continue;
 				}
 				String name = ReadKanjiDB.kanjis1.get(kanjiIndex).getName();
-				kanjiLabelA[i++].setText(kanji + ": " + name + " ");
+				var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
+				var htmlend = "</p></html>";
+				kanjiLabelA[i++].setText(htmlbegin + kanji + ": " + name + " " + htmlend);
 			}
 			
 			String gifs = kanjiToGif(kanjis);
