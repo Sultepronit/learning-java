@@ -31,7 +31,7 @@ public class UserDaoImplTest {
 				.map(Arrays::asList)//Lists of words
 				.flatMap(list -> list.stream())//words and empty entries
 				.filter(word -> word.length() > 3 && word.length() < 20)
-				.map(word -> new User(word))
+				.map(word -> new User(word, "pass" + word))
 				.limit(NUM_TEST_USERS)
 				.collect(Collectors.toList());
 	}
@@ -77,7 +77,7 @@ public class UserDaoImplTest {
 		
 		var result = new ArrayList<User>();
 		
-		var stmt = conn.prepareStatement("select id, name from user where id >= ? and id <= ?");
+		var stmt = conn.prepareStatement("select id, name, password from user where id >= ? and id <= ?");
 		stmt.setInt(1, minId);
 		stmt.setInt(2, maxId);
 		
@@ -86,8 +86,9 @@ public class UserDaoImplTest {
 		while(rs.next()) {
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
+			String password = rs.getString("password");
 			
-			var user = new User(id, name);
+			var user = new User(id, name, password);
 			result.add(user);
 		}
 		
@@ -117,6 +118,7 @@ public class UserDaoImplTest {
 		assertEquals("retrieved user doesn't match saved user", user, retrievedUser);
 		
 		user.setName("abcd");
+		user.setPassword("passsss");
 		userDao.update(user);
 		
 		retrievedUserOpt = userDao.findById(maxId);
@@ -204,17 +206,20 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void testSave() throws SQLException {
-		User user = new User("Jupiter");
+		User user = new User("Jupiter", "passs");
 		UserDao userDao = new UserDaoImpl();
 		userDao.save(user);
 		
 		var stmt = conn.createStatement();
-		var rs = stmt.executeQuery("select id, name from user order by id desc");
+		var rs = stmt.executeQuery("select id, name, passwod from user order by id desc");
 		var result = rs.next();
 		assertTrue("cannot retrieve inserted user", result);
 		
 		var name = rs.getString("name");
 		assertEquals("user name doesn't match retrieved", user.getName(), name);
+		
+		var password = rs.getString("password");
+		assertEquals("user password doesn't match retrieved", user.getPassword(), password);
 		
 		stmt.close();
 	}

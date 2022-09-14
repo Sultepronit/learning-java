@@ -1,11 +1,6 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.Test;
-
-/*
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -18,10 +13,15 @@ public class ProfileTest {
 		assertNotNull("cannot load db properties", props);
 		
 		var dbName = props.getProperty("database");
-		assertEquals("dbName incorrect", "peopletest", dbName);
+		assertEquals("dbName incorrect", "swingdb", dbName);
 	}
 }
-*/
+
+/*
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 
 public class ProfileTest {
 	@Test
@@ -34,3 +34,4 @@ public class ProfileTest {
 		assertEquals("swingdb", dbName, "dbName incorrect");
 	}
 }
+*/
