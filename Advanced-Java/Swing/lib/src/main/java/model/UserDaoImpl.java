@@ -14,9 +14,10 @@ public class UserDaoImpl implements UserDao {
 		var conn = Database.instance().getConnection();
 		
 		try {
-			var stmt = conn.prepareStatement("insert into user (name) values (?)");
+			var stmt = conn.prepareStatement("insert into user (name, password) values (?, ?)");
 			
 			stmt.setString(1, u.getName());
+			stmt.setString(2, u.getPassword());
 			stmt.executeUpdate();
 			//System.out.println(u.getName());
 			
@@ -32,14 +33,15 @@ public class UserDaoImpl implements UserDao {
 		var conn = Database.instance().getConnection();
 		
 		try {
-			var stmt = conn.prepareStatement("select name from user where id=?");
+			var stmt = conn.prepareStatement("select name, password from user where id=?");
 			stmt.setInt(1, id);
 			
 			var rs = stmt.executeQuery();
 			
 			if(rs.next()) {
 				var name = rs.getString("name");
-				User user = new User(id, name);
+				var password = rs.getString("password");
+				User user = new User(id, name, password);
 				
 				return Optional.of(user);
 			}
@@ -55,9 +57,10 @@ public class UserDaoImpl implements UserDao {
 	public void update(User u) {
 		var conn = Database.instance().getConnection();
 		try {
-			var stmt = conn.prepareStatement("update user set name=? where id=?");
+			var stmt = conn.prepareStatement("update user set name=?, password=? where id=?");
 			stmt.setString(1, u.getName());
-			stmt.setInt(2, u.getId());
+			stmt.setString(2, u.getPassword());
+			stmt.setInt(3, u.getId());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -90,13 +93,14 @@ public class UserDaoImpl implements UserDao {
 		try {
 			var stmt = conn.createStatement();
 			
-			var rs = stmt.executeQuery("select id, name from user order by id");
+			var rs = stmt.executeQuery("select id, name, password from user order by id");
 			
 			while(rs.next()) {
 				var id = rs.getInt("id");
 				var name = rs.getString("name");
+				var password = rs.getString("password");
 				
-				users.add(new User(id, name));
+				users.add(new User(id, name, password));
 			}
 			
 			stmt.close();

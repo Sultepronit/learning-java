@@ -26,7 +26,7 @@ public class UserDaoImplTest {
 	
 	private List<User> loadUsers() throws IOException {
 		return Files
-				.lines(Paths.get("../greatexpectations.txt"))//lines
+				.lines(Paths.get("../../greatexpectations.txt"))//lines
 				.map(line -> line.split("[^A-Za-z]"))//arrays of words
 				.map(Arrays::asList)//Lists of words
 				.flatMap(list -> list.stream())//words and empty entries
@@ -211,7 +211,7 @@ public class UserDaoImplTest {
 		userDao.save(user);
 		
 		var stmt = conn.createStatement();
-		var rs = stmt.executeQuery("select id, name, passwod from user order by id desc");
+		var rs = stmt.executeQuery("select id, name, password from user order by id desc");
 		var result = rs.next();
 		assertTrue("cannot retrieve inserted user", result);
 		
