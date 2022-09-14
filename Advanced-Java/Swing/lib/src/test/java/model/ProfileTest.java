@@ -31,6 +31,6 @@ public class ProfileTest {
 		assertNotNull(props, "cannot load db properties");
 		
 		var dbName = props.getProperty("database");
-		assertEquals("dbName incorrect", "peopletest", dbName);
+		assertEquals("swingdb", dbName, "dbName incorrect");
 	}
 }

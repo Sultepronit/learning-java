@@ -5,14 +5,17 @@ import java.util.Objects;
 public class User {
 	private int id;
 	private String name;
+	private String password;
 	
-	User(String name) {
+	User(String name, String password) {
 		this.name = name; 
+		this.password = password;
 	}
 	
-	User(int id, String name) {
+	User(int id, String name, String password) {
 		this.id = id;
 		this.name = name; 
+		this.password = password;
 	}
 
 	public int getId() {
@@ -31,14 +34,17 @@ public class User {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + "]";
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(id, name, password);
 	}
 
 	@Override
@@ -50,9 +56,13 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return id == other.id && Objects.equals(name, other.name);
+		return id == other.id && Objects.equals(name, other.name) && Objects.equals(password, other.password);
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
+	}
+
 	
 }
