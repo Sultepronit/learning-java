@@ -47,4 +47,13 @@ public class ReadFile {
 			e.printStackTrace();
 		}
 	}
+	
+	/*public static void kanjiToWords(char kanji) {
+		System.out.println(kanji);
+		for(var word: words1) {
+			if(word.getAllKanji().contains(kanji)) {
+				System.out.println(word);
+			}
+		}
+	}*/
 }

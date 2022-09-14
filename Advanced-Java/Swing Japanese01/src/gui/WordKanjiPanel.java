@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Database0.ReadFile;
 import application.PlayMP3;
 
 class GetKey implements KeyListener {
@@ -51,6 +52,7 @@ public class WordKanjiPanel extends JPanel {
 	public static JLabel wordLabel = new JLabel("word");
 	public static JLabel transcriptionLabel = new JLabel("");
 	public static JLabel translationLabel = new JLabel("");
+	private static JLabel listLabel = new JLabel("---");
 	
 	public WordKanjiPanel() {
 		//setBackground(Color.white);
@@ -62,18 +64,6 @@ public class WordKanjiPanel extends JPanel {
 				+ "Progres...</p></html>");
 		basicLabel.setFocusable(true);
 		basicLabel.addKeyListener(getKey);
-		//basicLabel.addKeyListener(this);
-		
-		/*basicLabel.setBackground(Color.YELLOW);
-		basicLabel.setForeground(Color.red);*/
-		
-		//var wordLabel = new JLabel("word");
-		
-		/*setLayout(new BorderLayout());
-		add(basicLabel, BorderLayout.PAGE_START);
-		var wordPanel = new WordPanel();
-		//add(wordPanel, BorderLayout.PAGE_END);
-		add(wordPanel, BorderLayout.CENTER);*/
 		
 		setLayout(new GridBagLayout());
 		var gc = new GridBagConstraints();
@@ -112,16 +102,10 @@ public class WordKanjiPanel extends JPanel {
 		var kanjiPanel = new KanjiPanel();
 		whitePanel.add(kanjiPanel, nc);
 		
-		/*whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
-		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
-		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
-		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
-		whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
-		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
-		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
-		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
-		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));
-		whitePanel.add(new JLabel("korekaradekakenakerebanarimasen"));*/
+		gc.gridy++;
+		add(listLabel, gc);
+		//whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
+		
 		
 		gc.gridy++;
 		//gc.gridx++;
@@ -131,6 +115,15 @@ public class WordKanjiPanel extends JPanel {
 		gc.anchor = GridBagConstraints.LAST_LINE_END;
 		add(new JLabel("#####"), gc);
 		
+	}
+	
+	public static void kanjiToWords(char kanji) {
+		System.out.println(kanji);
+		for(var word: ReadFile.words1) {
+			if(word.getAllKanji().contains(kanji)) {
+				System.out.println(word);
+			}
+		}
 	}
 
 }

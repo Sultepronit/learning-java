@@ -32,6 +32,8 @@ class KanjiMouse implements MouseListener {
 		}*/
 		
 		System.out.println(infoArray[2]);
+		
+		WordKanjiPanel.kanjiToWords(infoArray[2].charAt(0));
 	}
 	
 	@Override
@@ -169,15 +171,15 @@ public class WordPanel extends JPanel {
 					continue;
 				}*/
 				var kanjiIndex = ReadKanjiDB.kanjiIndex.get(kanji);
-				System.out.println("kanjiIndex: " + kanjiIndex);
+				//System.out.println("kanjiIndex: " + kanjiIndex);
+				var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
+				var htmlend = " </p></html>";
 				if(kanjiIndex == null) {
-					kanjiLabelA[i++].setText(kanji + "? ");
+					kanjiLabelA[i++].setText(htmlbegin + kanji + "?" + htmlend);
 					continue;
 				}
 				String name = ReadKanjiDB.kanjis1.get(kanjiIndex).getName();
-				var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
-				var htmlend = "</p></html>";
-				kanjiLabelA[i++].setText(htmlbegin + kanji + ": " + name + " " + htmlend);
+				kanjiLabelA[i++].setText(htmlbegin + kanji + ": " + name + htmlend);
 			}
 			
 			String gifs = kanjiToGif(kanjis);
