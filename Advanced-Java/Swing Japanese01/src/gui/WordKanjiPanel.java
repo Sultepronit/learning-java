@@ -117,6 +117,7 @@ public class WordKanjiPanel extends JPanel {
 		
 	}
 	
+	
 	public static void kanjiToWords(char kanji) {
 		System.out.println(kanji);
 		for(var word: ReadFile.words1) {
