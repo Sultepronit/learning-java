@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,6 +12,7 @@ import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import Database0.ReadFile;
 import application.PlayMP3;
@@ -103,7 +106,23 @@ public class WordKanjiPanel extends JPanel {
 		whitePanel.add(kanjiPanel, nc);
 		
 		gc.gridy++;
-		add(listLabel, gc);
+		//add(listLabel, gc);		
+		//listLabel.setMaximumSize(new Dimension(1000,500));
+		listLabel.setForeground(Color.black);
+		listLabel.setFont(new Font("Noto Sans JP", Font.PLAIN, 40));
+		
+		JScrollPane scrollPane = new JScrollPane(listLabel);
+		//scrollPane.setViewportView(box);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		//JScrollPane scrollPane = new JScrollPane();
+		//scrollPane.setLayout(new GridBagLayout());
+		//scrollPane.add(listLabel, gc);
+		//scrollPane.setMaximumSize(new Dimension(150, 410));
+		scrollPane.setPreferredSize(new Dimension(150, 410));
+		
+		add(scrollPane, gc);
+		
 		//whitePanel.add(new JLabel("sdfsdfsdfsdfdf"));
 		
 		
@@ -120,11 +139,17 @@ public class WordKanjiPanel extends JPanel {
 	
 	public static void kanjiToWords(char kanji) {
 		System.out.println(kanji);
+		var block = new StringBuilder("<html>");
+		var tag = "<p style='font-family:\"FreeSerif\"; background-color:white; padding:2; margin:3' >";
 		for(var word: ReadFile.words1) {
 			if(word.getAllKanji().contains(kanji)) {
-				System.out.println(word);
+				//System.out.println(word);
+				System.out.println(word.toTextLine());
+				block.append(tag + word.toTextLine() + "</p>");
 			}
 		}
+		block.append("</html>");
+		listLabel.setText(block.toString());
 	}
 
 }

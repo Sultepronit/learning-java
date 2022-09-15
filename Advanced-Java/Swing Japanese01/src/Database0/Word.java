@@ -146,6 +146,12 @@ public class Word {
 		return translation;
 	}
 	
+	public String toTextLine() {
+		var writings = getWritings();
+		var transcriptions = getTranscriptions();
+		return writings + " : " + transcriptions + " — " + translation;
+	}
+	
 	public String getExample() {
 		if(example > 0) return Examples.list[example];
 		return null;
