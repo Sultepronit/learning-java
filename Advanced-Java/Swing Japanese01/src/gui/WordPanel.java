@@ -78,13 +78,14 @@ public class WordPanel extends JPanel {
 		JPanel kanjiPanel = new JPanel();
 		kanjiPanel.setBorder(BorderFactory.createEtchedBorder());
 		add(kanjiPanel, gc);
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < 9; i++) {
 			//JLabel klabel = new JLabel("");
 			kanjiLabelA[i] = new JLabel("");
 			kanjiLabelA[i].addMouseListener(new KanjiMouse());
 			kanjiPanel.add(kanjiLabelA[i]);
 			kanjiLabelA[i].setForeground(Color.black);
-			kanjiLabelA[i].setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 30));
+			//kanjiLabelA[i].setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 30));
+			kanjiLabelA[i].setFont(new Font("Noto Sans JP", Font.PLAIN, 30));
 		}
 		
 		gc.gridy++;
@@ -173,6 +174,7 @@ public class WordPanel extends JPanel {
 				var kanjiIndex = ReadKanjiDB.kanjiIndex.get(kanji);
 				//System.out.println("kanjiIndex: " + kanjiIndex);
 				var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
+				//var htmlbegin = "<html><p>";
 				var htmlend = " </p></html>";
 				if(kanjiIndex == null) {
 					kanjiLabelA[i++].setText(htmlbegin + kanji + "?" + htmlend);
