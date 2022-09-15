@@ -173,8 +173,8 @@ public class WordPanel extends JPanel {
 				}*/
 				var kanjiIndex = ReadKanjiDB.kanjiIndex.get(kanji);
 				//System.out.println("kanjiIndex: " + kanjiIndex);
-				var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
-				//var htmlbegin = "<html><p>";
+				//var htmlbegin = "<html><p style='font-family:\"FreeSerif\" '>";
+				var htmlbegin = "<html><p>";
 				var htmlend = " </p></html>";
 				if(kanjiIndex == null) {
 					kanjiLabelA[i++].setText(htmlbegin + kanji + "?" + htmlend);
